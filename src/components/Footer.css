@@ -1,0 +1,172 @@
+/* Footer Styles */
+.footer {
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 40px 0 20px;
+  border-top: 4px solid ;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Main Footer Content */
+.footer-main {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 60px;
+  margin-bottom: 30px;
+}
+
+/* Questions Section */
+.footer-questions h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.questions-list p {
+  color: #e2e8f0;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding-left: 15px;
+  border-left: 2px solid #7c3aed;
+}
+
+.questions-list p:last-child {
+  margin-bottom: 0;
+}
+
+/* Footer Info Section */
+.footer-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+/* Quick Links */
+.quick-links h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.links-grid a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.links-grid a:hover {
+  color: #7c3aed;
+}
+
+/* Address */
+.address h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.address-details p {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.address-details p:last-child {
+  margin-bottom: 0;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #334155;
+  padding-top: 25px;
+}
+
+.consultation-btn {
+  background: #7c3aed;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.consultation-btn:hover {
+  background: #6d28d9;
+}
+
+.copyright p {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px 0 15px;
+  }
+  
+  .footer-container {
+    padding: 0 15px;
+  }
+  
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .footer-info {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .footer-questions h3 {
+    font-size: 1.2rem;
+  }
+  
+  .questions-list p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .links-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  
+  .consultation-btn {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
+  
+  .copyright p {
+    font-size: 0.7rem;
+  }
+}

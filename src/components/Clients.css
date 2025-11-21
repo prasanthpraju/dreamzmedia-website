@@ -1,0 +1,142 @@
+.trusted-section {
+  padding: 60px 0;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.trusted-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.trusted-section h2 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 40px;
+  font-family: Arial, sans-serif;
+}
+
+.trusted-section h2 .highlight {
+  color: #7c3aed;
+}
+
+/* Marquee Styles */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 60px;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+.logo-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  min-width: 180px;
+  height: 80px;
+  transition: all 0.3s ease;
+}
+
+.logo-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.logo-image {
+  max-width: 120px;
+  max-height: 50px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.logo-item:hover .logo-image {
+  transform: scale(1.05);
+}
+
+.logo-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4a5568;
+  transition: color 0.3s ease;
+}
+
+.logo-item:hover .logo-text {
+  color: #7c3aed;
+}
+
+/* Smooth infinite scrolling */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .trusted-section {
+    padding: 40px 0;
+  }
+
+  .trusted-section h2 {
+    font-size: 22px;
+    margin-bottom: 30px;
+  }
+
+  .logo-item {
+    min-width: 140px;
+    height: 70px;
+    padding: 10px 20px;
+  }
+
+  .logo-image {
+    max-width: 100px;
+    max-height: 40px;
+  }
+
+  .logo-text {
+    font-size: 1rem;
+  }
+
+  .marquee-content {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .trusted-section h2 {
+    font-size: 20px;
+  }
+
+  .logo-item {
+    min-width: 120px;
+    height: 60px;
+    padding: 8px 15px;
+  }
+
+  .marquee-content {
+    gap: 30px;
+  }
+}
