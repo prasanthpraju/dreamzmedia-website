@@ -1,17 +1,17 @@
 import React from 'react'
-import HeroSection from '../components/HeroSection'
+ 
 import OurMajorService from '../components/OurMajorService'
 import Clients from '../components/Clients'
-import ImageSlider from '../components/ImageSlider'
+import Hero from "../components/Hero"
 
 
 function Home() {
   return (
     <div>
-       <HeroSection/>
+       <Hero/>
        <OurMajorService/>
        <Clients/>
-       <ImageSlider/>
+       
     </div>
   )
 }

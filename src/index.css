@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+html, body {
+  margin: 0;      /* Removes default margins */
+  padding: 0;     /* Removes default padding */
+  box-sizing: border-box; /* A standard practice for easier layout */
+}
+
+/* Ensure your main content fills the view */
+body {
+  min-height: 100vh; /* Ensures the body covers at least the full viewport height */
+  display: flex;     /* Allows flexible child layout (optional, but often helpful) */
+  flex-direction: column; 
+}
