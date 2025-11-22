@@ -1,4 +1,4 @@
- import React, { useState } from "react";
+ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const services = [
@@ -6,39 +6,66 @@ const services = [
     id: 1,
     title: "Corporate Events",
     image: "https://www.threetomatoes.com/wp-content/uploads/2023/10/common-corporate-events.jpg",
-    description: "Professional event management for corporate gatherings, conferences, and business meetings",
-    gradient: "from-blue-500 to-purple-600",
-    icon: "🏢"
+    description: "Professional event management for corporate gatherings, conferences, and business meetings with precision and excellence",
+    
   },
   {
     id: 3,
     title: "Wedding Events",
     image: "https://www.weddingsutra.com/images/Vendor_Images/Wedding_Planners/Copper-Events/copper-events-01.jpg",
-    description: "Magical wedding celebrations with perfect planning and execution",
-    gradient: "from-pink-500 to-red-600",
-    icon: "💍"
+    description: "Magical wedding celebrations with perfect planning and execution for your special day",
+    
   },
   {
     id: 4,
     title: "School Events",
     image: "https://evergreengroup.in/wp-content/uploads/2017/07/Arya-Gurukul-School-Annual-Day-14-1024x516.jpg",
-    description: "Memorable school functions, annual days, and educational events",
-    gradient: "from-green-500 to-teal-600",
-    icon: "🎓"
+    description: "Memorable school functions, annual days, and educational events with creative excellence",
+     
   },
   {
     id: 2,
     title: "Birthday Parties",
     image: "https://surpriseplanner.in/assets/photo/product/product_other_5240_1633185491.jpg",
-    description: "Fun-filled birthday celebrations for all ages with creative themes",
-    gradient: "from-yellow-500 to-orange-600",
-    icon: "🎂"
+    description: "Fun-filled birthday celebrations for all ages with innovative themes and concepts",
+   
   },
 ];
 
 const OurMajorService = () => {
   const navigate = useNavigate();
-  const [hoveredCard, setHoveredCard] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const heroHeight = window.innerHeight * 0.8; // 80% of viewport height
+      
+      if (scrollPosition > heroHeight) {
+        setIsScrolled(true);
+        setIsVisible(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    // Initial check
+    handleScroll();
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   const handleCardClick = (serviceId) => {
     switch(serviceId) {
@@ -60,19 +87,58 @@ const OurMajorService = () => {
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-gray-50 to-purple-50 overflow-hidden">
-      {/* Background Elements */}
+    <section className={`relative py-20 min-h-screen overflow-hidden bg-gradient-to-br from-pink-50 via-white to-rose-50 transition-all duration-1000 ${
+      isScrolled ? 'opacity-100' : 'opacity-0 -translate-y-10'
+    }`}>
+      {/* New Background Animation - Different Style */}
       <div className="absolute inset-0">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-purple-200 rounded-full blur-3xl opacity-30 animate-float"></div>
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-pink-200 rounded-full blur-3xl opacity-30 animate-float" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-200 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        {/* Wave-like gradient orbs */}
+        <div 
+          className="absolute top-1/4 left-1/4 w-72 h-72 bg-pink-200/35 rounded-full blur-3xl animate-wave-move"
+          style={{ transform: `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.02}px)` }}
+        ></div>
+        <div 
+          className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-rose-200/35 rounded-full blur-3xl animate-wave-move-reverse"
+          style={{ transform: `translate(${mousePosition.x * -0.015}px, ${mousePosition.y * -0.01}px)` }}
+        ></div>
+        
+        {/* Pulsing circles */}
+        <div className="absolute top-1/3 right-1/5 w-40 h-40 bg-pink-300/20 rounded-full animate-pulse-slow"></div>
+        <div className="absolute bottom-1/4 left-1/5 w-32 h-32 bg-rose-300/20 rounded-full animate-pulse-delayed"></div>
+        
+        {/* Geometric floating shapes */}
+        <div className="absolute top-20 right-16 w-24 h-24 bg-gradient-to-br from-pink-400/15 to-rose-400/15 rounded-lg rotate-45 animate-float-diagonal shadow-xl"></div>
+        <div className="absolute bottom-20 left-20 w-20 h-20 bg-gradient-to-bl from-rose-400/15 to-pink-400/15 rounded-full animate-float-spiral shadow-xl"></div>
+        <div className="absolute top-40 left-32 w-16 h-16 bg-pink-400/20 rounded-lg animate-float-bounce shadow-xl"></div>
+        <div className="absolute bottom-32 right-24 w-28 h-28 bg-rose-400/15 rounded-full animate-float-elastic shadow-xl"></div>
+        
+        {/* New grid pattern - diagonal */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="w-full h-full bg-diagonal-pattern animate-diagonal-move"></div>
+        </div>
+
+        {/* Animated lines */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-pink-300/30 to-transparent animate-scan-line"></div>
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-rose-300/30 to-transparent animate-scan-line-delayed"></div>
       </div>
+
+      {/* Cursor follower - same style */}
+      <div 
+        className="fixed w-6 h-6 bg-pink-500 rounded-full pointer-events-none z-20 mix-blend-multiply"
+        style={{
+          left: `${mousePosition.x - 12}px`,
+          top: `${mousePosition.y - 12}px`,
+          transition: 'transform 0.1s ease-out'
+        }}
+      ></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transform transition-all duration-1000 delay-300 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our Major <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Services</span>
+            Our <span className="text-pink-600">Major Services</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Professional event management services tailored to make your occasions truly memorable and stress-free
@@ -80,25 +146,25 @@ const OurMajorService = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
           {services.map((service, index) => (
             <div
               key={service.id}
-              className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer overflow-hidden"
+              className={`group relative bg-white rounded-2xl border border-gray-200 p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform ${
+                isVisible ? 'opacity-100 translate-y-0 hover:-translate-y-3' : 'opacity-0 translate-y-10'
+              } cursor-pointer overflow-hidden`}
               onClick={() => handleCardClick(service.id)}
-              onMouseEnter={() => setHoveredCard(service.id)}
-              onMouseLeave={() => setHoveredCard(null)}
               style={{
-                animationDelay: `${index * 100}ms`,
+                transitionDelay: `${index * 200}ms`,
               }}
             >
-              {/* Gradient Overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+              {/* Hover Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-500 to-rose-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
               
               {/* Card Content */}
-              <div className="relative p-6">
+              <div className="relative z-10">
                 {/* Icon */}
-                <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                <div className="text-4xl mb-4 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
                   {service.icon}
                 </div>
 
@@ -112,7 +178,7 @@ const OurMajorService = () => {
                     />
                   </div>
                   {/* Overlay Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
                   {/* View More Button */}
                   <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
@@ -133,7 +199,7 @@ const OurMajorService = () => {
                 </p>
 
                 {/* Hover Indicator */}
-                <div className="flex items-center text-purple-600 font-semibold text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+                <div className="flex items-center text-pink-600 font-semibold text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
                   <span>Explore Service</span>
                   <svg
                     className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300"
@@ -147,7 +213,7 @@ const OurMajorService = () => {
               </div>
 
               {/* Animated Border */}
-              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`}>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10">
                 <div className="absolute inset-[2px] rounded-2xl bg-white"></div>
               </div>
             </div>
@@ -155,21 +221,88 @@ const OurMajorService = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center mt-12">
-          <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/25">
+        <div className={`text-center transform transition-all duration-1000 delay-700 ${
+          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        }`}>
+          <button className="bg-pink-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
             View All Services
           </button>
         </div>
       </div>
 
-      {/* Custom Animations */}
+      {/* New Animation Dimensions */}
       <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
+        @keyframes wave-move {
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          25% { transform: translate(20px, 15px) scale(1.1); }
+          50% { transform: translate(40px, 0px) scale(1.05); }
+          75% { transform: translate(20px, -15px) scale(1.1); }
         }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
+        @keyframes wave-move-reverse {
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          25% { transform: translate(-15px, 10px) scale(1.08); }
+          50% { transform: translate(-30px, 0px) scale(1.1); }
+          75% { transform: translate(-15px, -10px) scale(1.08); }
+        }
+        @keyframes pulse-slow {
+          0%, 100% { transform: scale(1); opacity: 0.2; }
+          50% { transform: scale(1.3); opacity: 0.4; }
+        }
+        @keyframes pulse-delayed {
+          0%, 100% { transform: scale(1); opacity: 0.2; }
+          50% { transform: scale(1.2); opacity: 0.3; }
+        }
+        @keyframes float-diagonal {
+          0%, 100% { transform: translate(0px, 0px) rotate(45deg); }
+          50% { transform: translate(15px, -15px) rotate(60deg); }
+        }
+        @keyframes float-spiral {
+          0% { transform: translate(0px, 0px) rotate(0deg); }
+          25% { transform: translate(8px, -12px) rotate(90deg); }
+          50% { transform: translate(0px, -20px) rotate(180deg); }
+          75% { transform: translate(-8px, -12px) rotate(270deg); }
+          100% { transform: translate(0px, 0px) rotate(360deg); }
+        }
+        @keyframes float-bounce {
+          0%, 100% { transform: translateY(0px); }
+          25% { transform: translateY(-10px); }
+          50% { transform: translateY(-5px); }
+          75% { transform: translateY(-15px); }
+        }
+        @keyframes float-elastic {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          25% { transform: translateY(-12px) scale(1.1); }
+          50% { transform: translateY(-8px) scale(0.9); }
+          75% { transform: translateY(-15px) scale(1.05); }
+        }
+        @keyframes diagonal-move {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(30px, 30px); }
+        }
+        @keyframes scan-line {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        
+        .animate-wave-move { animation: wave-move 15s ease-in-out infinite; }
+        .animate-wave-move-reverse { animation: wave-move-reverse 18s ease-in-out infinite 2s; }
+        .animate-pulse-slow { animation: pulse-slow 8s ease-in-out infinite; }
+        .animate-pulse-delayed { animation: pulse-delayed 10s ease-in-out infinite 1s; }
+        .animate-float-diagonal { animation: float-diagonal 12s ease-in-out infinite; }
+        .animate-float-spiral { animation: float-spiral 20s linear infinite; }
+        .animate-float-bounce { animation: float-bounce 6s ease-in-out infinite; }
+        .animate-float-elastic { animation: float-elastic 9s ease-in-out infinite 1.5s; }
+        .animate-diagonal-move { animation: diagonal-move 40s linear infinite; }
+        .animate-scan-line { animation: scan-line 8s linear infinite; }
+        .animate-scan-line-delayed { animation: scan-line 8s linear infinite 4s; }
+        
+        .bg-diagonal-pattern {
+          background-image: linear-gradient(45deg, rgba(244, 114, 182, 0.05) 25%, transparent 25%),
+                            linear-gradient(-45deg, rgba(244, 114, 182, 0.05) 25%, transparent 25%),
+                            linear-gradient(45deg, transparent 75%, rgba(244, 114, 182, 0.05) 75%),
+                            linear-gradient(-45deg, transparent 75%, rgba(244, 114, 182, 0.05) 75%);
+          background-size: 20px 20px;
+          background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
         }
         
         .line-clamp-2 {

@@ -31,6 +31,7 @@ import Videographyandphotography from './pages/Videographyandphotography'
 import Bannerandarch from './pages/Bannerandarch'
 import Trophiesandgift from './pages/Trophiesandgift'
 import Stage from './pages/Stage'
+import ScrollToTop from './components/ScrollToTop'
 
 
 
@@ -42,6 +43,7 @@ function App() {
     <>
     
      <Navbar/>
+     <ScrollToTop/>
      <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/about' element={<About/>}/>
