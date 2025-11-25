@@ -12,3 +12,24 @@ body {
   display: flex;     /* Allows flexible child layout (optional, but often helpful) */
   flex-direction: column; 
 }
+@keyframes moveLeftRight1 {
+  0%, 100% {
+    transform: translateX(-50%) scaleX(0.6);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes moveLeftRight2 {
+  0%, 100% {
+    transform: translateX(-50%) scaleX(0.6);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 1;
+  }
+}

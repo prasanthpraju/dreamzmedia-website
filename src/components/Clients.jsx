@@ -123,7 +123,7 @@ const Clients = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-            Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-rose-600">Industry Leaders</span>
+            Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-900 to-rose-800">Industry Leaders</span>
           </h2>
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
             Partnered with top global companies to deliver exceptional event experiences
@@ -195,7 +195,7 @@ const Clients = () => {
                 onClick={() => setCurrentSlide(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentSlide 
-                    ? 'bg-pink-500 w-8' 
+                    ? 'bg-pink-900 w-8' 
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
               />
@@ -211,7 +211,7 @@ const Clients = () => {
           }`}
         >
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-1 sm:mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-pink-900 to-rose-900 bg-clip-text text-transparent mb-1 sm:mb-2">
               {counters.clients}+
             </div>
             <div className="text-xs sm:text-sm md:text-base text-gray-600 font-medium leading-tight">
@@ -220,7 +220,7 @@ const Clients = () => {
           </div>
           
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-1 sm:mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-pink-900 to-rose-900 bg-clip-text text-transparent mb-1 sm:mb-2">
               {counters.events}+
             </div>
             <div className="text-xs sm:text-sm md:text-base text-gray-600 font-medium leading-tight">
@@ -229,7 +229,7 @@ const Clients = () => {
           </div>
           
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-1 sm:mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-pink-900 to-rose-900 bg-clip-text text-transparent mb-1 sm:mb-2">
               {counters.satisfaction}%
             </div>
             <div className="text-xs sm:text-sm md:text-base text-gray-600 font-medium leading-tight">
