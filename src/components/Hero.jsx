@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import heroEvent1 from "../assets/e1.jpg";
+import heroEvent1 from "../assets/e10.jpg";
 import heroEvent2 from "../assets/e2.jpg";
-import heroEvent3 from "../assets/e3.jpg";
+import heroEvent3 from "../assets/e8.jpg";
 import heroEvent4 from "../assets/e5.jpg";
 
 const HeroSection = () => {
@@ -89,7 +89,7 @@ const HeroSection = () => {
                 </h1>
 
                 {/* Badge */}
-                <div className="absolute -top-2 -right-2 bg-pink-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+                <div className="absolute -top-2 -right-2 bg-pink-900 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
                   Since 2010
                 </div>
               </div>

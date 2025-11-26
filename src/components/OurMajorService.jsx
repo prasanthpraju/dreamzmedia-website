@@ -196,7 +196,7 @@ const OurMajorService = () => {
             isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <button className="bg-pink-900 text-white px-8 py-4 rounded-xl font-semibold hover:bg-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+          <button className="bg-pink-900 text-white px-8 py-4 rounded-xl font-semibold  transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
             View All Services
           </button>
         </div>
