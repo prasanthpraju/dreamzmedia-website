@@ -123,14 +123,14 @@ const Contact = () => {
       </div>
 
       {/* Cursor follower */}
-      <div 
-        className="fixed w-6 h-6 bg-pink-500 rounded-full pointer-events-none z-20 mix-blend-multiply"
+      {/* <div 
+        className="fixed w-6 h-6 bg-pink-7 rounded-full pointer-events-none z-20 mix-blend-multiply"
         style={{
           left: `${mousePosition.x - 12}px`,
           top: `${mousePosition.y - 12}px`,
           transition: 'transform 0.1s ease-out'
         }}
-      ></div>
+      ></div> */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -138,12 +138,12 @@ const Contact = () => {
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Contact <span className="text-pink-600">Dreamzmedia</span>
+            Contact <span className="text-pink-900">Dreamzmedia</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Let's Create Unforgettable Experiences Together
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-pink-500 to-rose-500 mx-auto mt-6 rounded-full"></div>
+          <div className="w-24 h-1 bg-pink-900 mx-auto mt-6 rounded-full"></div>
         </div>
 
         {/* Features Grid */}
@@ -195,7 +195,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-900 focus:border-pink-900 transition-all duration-300"
                         placeholder="Enter your full name"
                       />
                     </div>
@@ -228,7 +228,7 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-900 focus:border-pink-900 transition-all duration-300"
                       placeholder="Enter your email address"
                     />
                   </div>
@@ -244,7 +244,7 @@ const Contact = () => {
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-900 focus:border-pink-900 transition-all duration-300"
                         placeholder="Enter your company name"
                       />
                     </div>
@@ -259,7 +259,7 @@ const Contact = () => {
                         name="location"
                         value={formData.location}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-900 focus:border-pink-900 transition-all duration-300"
                         placeholder="Enter your location"
                       />
                     </div>
@@ -267,7 +267,7 @@ const Contact = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to- bg-pink-600 text-white py-4 px-6 rounded-xl font-bold text-lg hover:from-pink-700 hover:to-rose-700 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    className="w-full bg-gradient-to- bg-pink-900 text-white py-4 px-6 rounded-xl font-bold text-lg hover:from-pink-900 hover:to-rose-900 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
                   >
                     BOOK A FREE CONSULTATION
                   </button>
@@ -317,7 +317,7 @@ const Contact = () => {
                       key={index}
                       className="group flex items-center space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1"
                     >
-                      <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                      <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-pink-900 to-rose-900 rounded-full flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
                         <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
                       </div>
                       <span className="text-gray-700 font-medium">{info.detail}</span>
@@ -327,7 +327,7 @@ const Contact = () => {
               </div>
 
               {/* Animated Border */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-900 to-rose-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10">
                 <div className="absolute inset-[2px] rounded-2xl bg-white"></div>
               </div>
             </div>
@@ -347,7 +347,7 @@ const Contact = () => {
             <p className="text-black text-lg mb-6">
               Let's discuss your event vision and bring it to life
             </p>
-            <button className="bg-white text-pink-600 px-8 py-3 rounded-xl font-bold hover:bg-gray-100 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
+            <button className="bg-white text-pink-900 px-8 py-3 rounded-xl font-bold hover:bg-gray-100 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl">
               CALL NOW: +91 98765 43210
             </button>
           </div>

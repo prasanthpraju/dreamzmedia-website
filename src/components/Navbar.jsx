@@ -21,7 +21,7 @@ const Navbar = () => {
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
     { name: "Events", path: "/culturalevents" },
-    { name: "What We Do", path: "/services" }
+    { name: "What We Do", path: "/WhatWeDo" }
   ];
 
   return (
@@ -31,6 +31,7 @@ const Navbar = () => {
           ? "bg-white/95 backdrop-blur-xl shadow-2xl py-3"
           : "bg-transparent py-6"
       }`}
+        style={{ position: 'fixed', top: 0, left: 0, right: 0 }}
     >
       <div
         className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r 

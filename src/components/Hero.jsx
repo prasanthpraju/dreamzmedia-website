@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import heroEvent1 from "../assets/e10.jpg";
 import heroEvent2 from "../assets/e2.jpg";
 import heroEvent3 from "../assets/e8.jpg";
-import heroEvent4 from "../assets/e5.jpg";
+import heroEvent4 from "../assets/e1.jpg";
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);

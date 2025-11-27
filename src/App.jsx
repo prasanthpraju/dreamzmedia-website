@@ -32,6 +32,8 @@ import Bannerandarch from './pages/Bannerandarch'
 import Trophiesandgift from './pages/Trophiesandgift'
 import Stage from './pages/Stage'
 import ScrollToTop from './components/ScrollToTop'
+import WhatWeDo from './components/WhatWeDo'
+import OurMajorService from './components/OurMajorService'
 
 
 
@@ -48,7 +50,8 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route path='/about' element={<About/>}/>
       <Route path='/contact' element={<Contact/>}/>
-      <Route path='/conference' element={<Conference/>}/>
+      <Route path='/WhatWeDo' element={<WhatWeDo/>}/>
+      <Route path='/conference' element={<CorporateGift/>}/>
       <Route path='/wedding-events' element={<Wedding/>}/>
       <Route path='/dealersmeet' element={<DealersMeet/>}/>
       <Route path='/culturalevents' element={<CulturalEvents/>}/>
