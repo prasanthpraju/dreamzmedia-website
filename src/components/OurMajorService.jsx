@@ -1,4 +1,4 @@
- import React, { useState, useEffect } from "react";
+ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const services = [
@@ -38,30 +38,7 @@ const services = [
 
 const OurMajorService = () => {
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const heroHeight = window.innerHeight * 0.8;
-
-      if (scrollPosition > heroHeight) {
-        setIsScrolled(true);
-        setIsVisible(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const [isVisible] = useState(true); // always visible
 
   const handleCardClick = (serviceId) => {
     switch (serviceId) {
@@ -83,11 +60,7 @@ const OurMajorService = () => {
   };
 
   return (
-    <section
-      className={`relative py-20 min-h-screen overflow-hidden bg-gradient-to-br from-pink-50 via-white to-rose-50 transition-all duration-1000 ${
-        isScrolled ? "opacity-100" : "opacity-0 -translate-y-10"
-      }`}
-    >
+    <section className="relative py-20 min-h-screen overflow-hidden bg-gradient-to-br from-pink-50 via-white to-rose-50 transition-all duration-1000 opacity-100">
       {/* Background Animation */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-pink-200/35 rounded-full blur-3xl animate-wave-move"></div>
@@ -196,93 +169,51 @@ const OurMajorService = () => {
             isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <button className="bg-pink-900 text-white px-8 py-4 rounded-xl font-semibold  transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+          <button className="bg-pink-900 text-white px-8 py-4 rounded-xl font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
             View All Services
           </button>
         </div>
       </div>
 
-      {/* Global CSS (NO jsx attribute!) */}
+      {/* Global CSS */}
       <style>{`
-        @keyframes wave-move {
-          0%, 100% { transform: translate(0px, 0px) scale(1); }
-          25% { transform: translate(20px, 15px) scale(1.1);}
-          50% { transform: translate(40px, 0px) scale(1.05);}
-          75% { transform: translate(20px, -15px) scale(1.1);}
-        }
-        @keyframes wave-move-reverse {
-          0%, 100% { transform: translate(0px, 0px) scale(1);}
-          25% { transform: translate(-15px, 10px) scale(1.08);}
-          50% { transform: translate(-30px, 0px) scale(1.1);}
-          75% { transform: translate(-15px, -10px) scale(1.08);}
-        }
-        @keyframes pulse-slow {
-          0%, 100% { transform: scale(1); opacity: 0.2; }
-          50% { transform: scale(1.3); opacity: 0.4; }
-        }
-        @keyframes pulse-delayed {
-          0%, 100% { transform: scale(1); opacity: 0.2;}
-          50% { transform: scale(1.2); opacity: 0.3;}
-        }
-        @keyframes float-diagonal {
-          0%,100% { transform: translate(0px,0px) rotate(45deg);}
-          50% { transform: translate(15px,-15px) rotate(60deg);}
-        }
-        @keyframes float-spiral {
-          0%{ transform: translate(0px,0px) rotate(0deg);}
-          25%{ transform: translate(8px,-12px) rotate(90deg);}
-          50%{ transform: translate(0px,-20px) rotate(180deg);}
-          75%{ transform: translate(-8px,-12px) rotate(270deg);}
-          100%{ transform: translate(0px,0px) rotate(360deg);}
-        }
-        @keyframes float-bounce {
-          0%,100% { transform: translateY(0px);}
-          25% { transform: translateY(-10px);}
-          50% { transform: translateY(-5px);}
-          75% { transform: translateY(-15px);}
-        }
-        @keyframes float-elastic {
-          0%,100% { transform: translateY(0px) scale(1);}
-          25% { transform: translateY(-12px) scale(1.1);}
-          50% { transform: translateY(-8px) scale(0.9);}
-          75% { transform: translateY(-15px) scale(1.05);}
-        }
-        @keyframes diagonal-move {
-          0% { transform: translate(0,0);}
-          100% { transform: translate(30px,30px);}
-        }
-        @keyframes scan-line {
-          0% { transform: translateX(-100%);}
-          100% { transform: translateX(100%);}
+        @keyframes wave-move {0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(20px,15px) scale(1.1)}50%{transform:translate(40px,0) scale(1.05)}75%{transform:translate(20px,-15px) scale(1.1)}}
+        @keyframes wave-move-reverse {0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(-15px,10px) scale(1.08)}50%{transform:translate(-30px,0) scale(1.1)}75%{transform:translate(-15px,-10px) scale(1.08)}}
+        @keyframes pulse-slow {0%,100%{transform:scale(1);opacity:.2}50%{transform:scale(1.3);opacity:.4}}
+        @keyframes pulse-delayed {0%,100%{transform:scale(1);opacity:.2}50%{transform:scale(1.2);opacity:.3}}
+        @keyframes float-diagonal {0%,100%{transform:translate(0,0) rotate(45deg)}50%{transform:translate(15px,-15px) rotate(60deg)}}
+        @keyframes float-spiral {0%{transform:translate(0,0) rotate(0)}100%{transform:translate(0,0) rotate(360deg)}}
+        @keyframes float-bounce {0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        @keyframes float-elastic {0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-12px) scale(1.1)}}
+        @keyframes diagonal-move {0%{transform:translate(0,0)}100%{transform:translate(30px,30px)}}
+        @keyframes scan-line {0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+        .animate-wave-move{animation:wave-move 15s ease-in-out infinite}
+        .animate-wave-move-reverse{animation:wave-move-reverse 18s ease-in-out infinite}
+        .animate-pulse-slow{animation:pulse-slow 8s ease-in-out infinite}
+        .animate-pulse-delayed{animation:pulse-delayed 10s ease-in-out infinite}
+        .animate-float-diagonal{animation:float-diagonal 12s ease-in-out infinite}
+        .animate-float-spiral{animation:float-spiral 20s linear infinite}
+        .animate-float-bounce{animation:float-bounce 6s ease-in-out infinite}
+        .animate-float-elastic{animation:float-elastic 9s ease-in-out infinite}
+        .animate-diagonal-move{animation:diagonal-move 40s linear infinite}
+        .animate-scan-line{animation:scan-line 8s linear infinite}
+        .animate-scan-line-delayed{animation:scan-line 8s linear infinite 4s}
+
+        .bg-diagonal-pattern{
+          background-image:
+          linear-gradient(45deg, rgba(244,114,182,.05) 25%, transparent 25%),
+          linear-gradient(-45deg, rgba(244,114,182,.05) 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, rgba(244,114,182,.05) 75%),
+          linear-gradient(-45deg, transparent 75%, rgba(244,114,182,.05) 75%);
+          background-size:20px 20px;
         }
 
-        .animate-wave-move { animation: wave-move 15s ease-in-out infinite;}
-        .animate-wave-move-reverse { animation: wave-move-reverse 18s ease-in-out infinite 2s;}
-        .animate-pulse-slow { animation: pulse-slow 8s ease-in-out infinite;}
-        .animate-pulse-delayed { animation: pulse-delayed 10s ease-in-out infinite 1s;}
-        .animate-float-diagonal { animation: float-diagonal 12s ease-in-out infinite;}
-        .animate-float-spiral { animation: float-spiral 20s linear infinite;}
-        .animate-float-bounce { animation: float-bounce 6s ease-in-out infinite;}
-        .animate-float-elastic { animation: float-elastic 9s ease-in-out infinite 1.5s;}
-        .animate-diagonal-move { animation: diagonal-move 40s linear infinite;}
-        .animate-scan-line { animation: scan-line 8s linear infinite;}
-        .animate-scan-line-delayed { animation: scan-line 8s linear infinite 4s;}
-
-        .bg-diagonal-pattern {
-          background-image: 
-            linear-gradient(45deg, rgba(244,114,182,0.05) 25%, transparent 25%),
-            linear-gradient(-45deg, rgba(244,114,182,0.05) 25%, transparent 25%),
-            linear-gradient(45deg, transparent 75%, rgba(244,114,182,0.05) 75%),
-            linear-gradient(-45deg, transparent 75%, rgba(244,114,182,0.05) 75%);
-          background-size: 20px 20px;
-          background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-        }
-
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
+        .line-clamp-2{
+          display:-webkit-box;
+          -webkit-line-clamp:2;
+          -webkit-box-orient:vertical;
+          overflow:hidden;
         }
       `}</style>
     </section>
