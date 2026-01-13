@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+ import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // 1. Import Link
 // Ensure image paths are correct
 import heroEvent1 from "../assets/e10.jpg";
 import heroEvent2 from "../assets/e2.jpg";
@@ -11,99 +12,106 @@ const HeroSection = () => {
 
   const heroBackgrounds = [heroEvent1, heroEvent2, heroEvent3, heroEvent4];
 
-  // Modern Classic Data Presentation
-  // const stats = [
-  //   { id: 1, label: "Experience", value: "Since 2010" },
-  //   { id: 2, label: "Events Executed", value: "200+" },
-  //   { id: 3, label: "Client Rating", value: "5.0 ★" },
-  // ];
-
   useEffect(() => {
-    // Trigger entrance animation
     setTimeout(() => setIsLoaded(true), 100);
-
     const slideInterval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroBackgrounds.length);
-    }, 6000); // Slower, 6s rotation for elegance
-
+    }, 6000);
     return () => clearInterval(slideInterval);
   }, []);
 
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % heroBackgrounds.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? heroBackgrounds.length - 1 : prev - 1));
+
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-black font-sans">
-      {/* 1. BACKGROUND SLIDER (Ken Burns Effect) */}
+    // Use 100dvh for mobile browsers to avoid address bar jumping
+    <section className="relative w-full h-[100dvh] overflow-hidden bg-black font-sans selection:bg-pink-900 selection:text-white">
+      
+      {/* 1. BACKGROUND SLIDER */}
       <div className="absolute inset-0 z-0">
         {heroBackgrounds.map((bg, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-all duration-[2000ms] ease-in-out ${
-              index === currentSlide
-                ? "opacity-100 scale-110"
-                : "opacity-0 scale-100"
+            className={`absolute inset-0 transition-all duration-[2000ms] ease-in-out transform ${
+              index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-110"
             }`}
-            style={{
-              backgroundImage: `url(${bg})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
           >
-            {/* Advanced Gradient Overlay: Dark Top/Bottom, lighter Center */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-black/90" />
-
-            {/* Texture Overlay (Optional: adds a 'grain' for film look) */}
-            <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${bg})` }} />
+            {/* Gradients: Heavy on mobile bottom for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/30 opacity-80 lg:opacity-40" />
           </div>
         ))}
       </div>
 
       {/* 2. MAIN CONTENT */}
-      {/* pt-32 ensures content is pushed down, clearing your Navbar */}
-      <div className="relative z-10 h-full flex flex-col justify-center items-center px-4 pt-32 sm:px-6 lg:px-8 text-center">
-        <div
-          className={`transition-all duration-1000 ease-out transform ${
-            isLoaded ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
-          }`}
-        >
-          {/* Eyebrow Text */}
-          <div className="mb-6 flex items-center justify-center space-x-4">
-            <span className="h-[3px] w-8 bg-pink-800/50"></span>
-            <span className="text-pink-200 uppercase tracking-[0.3em] text-xs sm:text-sm font-medium font-['Montserrat']">
-              Premier Event Management
-            </span>
-            <span className="h-[3px] w-8 bg-pink-800/50"></span>
+      <div className="relative z-10 h-full max-w-[1920px] mx-auto px-6 lg:px-12 flex flex-col justify-center pt-12 lg:pt-20">
+        
+        <div className={`max-w-5xl transition-all duration-1000 ease-out transform ${isLoaded ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"}`}>
+          
+          {/* Badge */}
+          <div className="inline-flex items-center gap-3 mb-6 lg:mb-8 border border-white/20 px-4 py-2 lg:px-5 lg:py-2 rounded-full backdrop-blur-sm bg-white/5">
+            <span className="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse"></span>
+            <span className="text-pink-100 text-[10px] font-bold uppercase tracking-[0.25em]">Est. 2010 • Chennai</span>
           </div>
 
-          {/* Main Headline: Modern Classic Typography */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-tight font-['Cormorant_Garamond'] font-light">
-            We Create <br />
-            <span className="italic font-normal bg-gradient-to-r from-pink-200 via-pink-400 to-pink-200 bg-clip-text text-transparent">
-              Masterpieces
+          {/* Heading */}
+          <h1 className="text-white font-serif tracking-tight mb-6 lg:mb-8 leading-[1.1] lg:leading-[0.9]">
+            <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-[7rem]">Crafting</span>
+            <span className="block font-light italic text-gray-300 mt-2 text-5xl sm:text-7xl md:text-8xl lg:text-[7rem]">
+              Timeless Moments.
             </span>
           </h1>
-
-          {/* Subtext */}
-          <p className="mt-8 max-w-2xl mx-auto text-gray-200 text-lg sm:text-xl font-light font-['Montserrat'] leading-relaxed opacity-90">
-            From intimate gatherings to grand celebrations in Chennai.
-            <br className="hidden md:block" />
-            We curate moments that last a lifetime.
+          
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 font-light max-w-sm sm:max-w-xl leading-relaxed border-l-2 border-pink-900 pl-4 lg:pl-6 mb-8 lg:mb-12">
+            Chennai's premier event architects. We blend strategy, design, and technology to create immersive experiences that linger in memory.
           </p>
+
+          {/* 3. CTA Group with Links */}
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            
+            {/* Link to Contact Page */}
+            <Link to="/contact" className="w-full sm:w-auto">
+              <button className="w-full bg-white text-black px-10 py-4 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-pink-100 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                Start Planning
+              </button>
+            </Link>
+
+            {/* Link to Portfolio/Events Page */}
+            <Link to="/events" className="w-full sm:w-auto">
+              <button className="w-full group flex justify-center items-center gap-3 px-8 py-4 border border-white/20 text-white rounded-full font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
+                View Portfolio
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </button>
+            </Link>
+
+          </div>
+
         </div>
       </div>
 
-      {/* 5. SLIDE DOTS (Vertical Right) */}
-      <div className="absolute right-6 top-1/2 transform -translate-y-1/2 z-20 hidden lg:flex flex-col gap-4">
-        {heroBackgrounds.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-1.5 transition-all duration-500 rounded-full ${
-              index === currentSlide
-                ? "h-8 bg-pink-800"
-                : "h-1.5 bg-white/30 hover:bg-white/60"
-            }`}
-          />
-        ))}
+      {/* 4. CONTROLS */}
+      <div className="absolute bottom-8 right-6 lg:bottom-12 lg:right-12 z-20 flex items-center gap-4 lg:gap-8">
+        <div className="text-white font-serif text-xl lg:text-2xl">
+          0{currentSlide + 1} <span className="text-white/30 text-sm lg:text-lg mx-2 font-sans">/</span> <span className="text-white/30 text-lg font-sans">0{heroBackgrounds.length}</span>
+        </div>
+        
+        <div className="flex gap-3">
+          <button 
+            onClick={prevSlide} 
+            className="w-10 h-10 lg:w-12 lg:h-12 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all active:scale-95"
+          >
+            ←
+          </button>
+          <button 
+            onClick={nextSlide} 
+            className="w-10 h-10 lg:w-12 lg:h-12 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all active:scale-95"
+          >
+            →
+          </button>
+        </div>
       </div>
+
     </section>
   );
 };

@@ -1,161 +1,119 @@
-// WhatWeDo.jsx
-import React from "react";
+ import React from "react";
 import { Link } from "react-router-dom";
 
 const WhatWeDo = () => {
   const services = [
     {
-       
-      title: "Stress-Free Planning",
-      description:
-        "We manage every detail for seamless Corporate and government events.",
+      title: "Corporate Events",
+      description: "We orchestrate seamless corporate gatherings, from high-stakes board meetings to large-scale conferences. Our focus is on precision, branding, and creating an environment that fosters business connections.",
+      features: ["Conferences & Seminars", "Product Launches", "Award Ceremonies"],
+      image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&w=800&q=80",
+      link: "/conference"
     },
     {
-       
-      title: "Strengthen Team Bonds",
-      description: "Events designed to foster collaboration and trust.",
+      title: "Wedding Planning",
+      description: "Turning your dream wedding into reality. We handle everything from venue selection to the final farewell, ensuring your special day is filled with magic, elegance, and love, without the stress.",
+      features: ["Destination Weddings", "Decor & Styling", "Guest Management"],
+      image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80",
+      link: "/wedding-events"
     },
     {
-       
-      title: "Align with Your Vision",
-      description: "We create events that reflect your company's values.",
+      title: "Social & Cultural",
+      description: "Celebrating life's milestones and cultural heritage. Whether it's a vibrant music festival, a school annual day, or a private birthday bash, we bring energy and creativity to every occasion.",
+      features: ["School Annual Days", "Birthday Parties", "Music Festivals"],
+      image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80",
+      link: "/culturalevents"
     },
     {
-       
-      title: "Trusted Reliability",
-      description: "250+ events delivered for 100+ clients, flawlessly.",
+      title: "Production Services",
+      description: "The technical backbone of any great event. We provide top-tier audio-visual equipment, stage fabrication, and lighting designs that transform venues into immersive experiences.",
+      features: ["Light & Sound", "Stage Fabrication", "Live Streaming"],
+      image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=800&q=80",
+      link: "/stageandmusic"
     },
-    {
-       
-      title: "Cultural Integrity",
-      description: "We blend heritage and modernity for engaging experiences.",
-    },
-    {
-       
-      title: "Boost Engagement",
-      description: "Corporate Events that enhance morale and your brand.",
-    },
-  ];
-
-  const eventImages = [
-    "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    "https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-pink-50 pt-24 pb-16">
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            What We <span className="text-pink-900">Do</span>
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Creating unforgettable experiences through meticulous planning,
-            creative execution, and a passion for bringing your vision to life.
-          </p>
-        </div>
-
-        {/* Event Gallery Section */}
-        <div className="mb-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {eventImages.map((image, index) => (
-              <div
-                key={index}
-                className="relative group overflow-hidden rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-500"
-              >
-                <img
-                  src={image}
-                  alt={`Event ${index + 1}`}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Services Section */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 border border-pink-100">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Our <span className="text-pink-900">Services</span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-pink-500 to-pink-700 mx-auto rounded-full"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="group relative bg-gradient-to-br from-white to-pink-50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-pink-100 hover:border-pink-300 transform hover:-translate-y-2"
-              >
-                <div className="relative z-10">
-                  <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-pink-900 transition-colors duration-300">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-
-                {/* Hover effect border */}
-                <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-pink-900/20 transition-all duration-500"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        {/* <div className="mt-20 bg-gradient-to-r from-pink-900 to-pink-700 rounded-3xl p-8 md:p-12 text-white shadow-2xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">250+</div>
-              <div className="text-pink-200 font-semibold">Events Delivered</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">100+</div>
-              <div className="text-pink-200 font-semibold">Happy Clients</div>
-            </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold mb-2">98%</div>
-              <div className="text-pink-200 font-semibold">Success Rate</div>
-            </div>
-          </div>
-        </div> */}
-
-        {/* CTA Section */}
-        <div className="mt-20 text-center">
-          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border border-pink-100">
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Ready to Create Something{" "}
-              <span className="text-pink-900">Amazing?</span>
-            </h3>
-            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Let's discuss your next event and turn your vision into an
-              unforgettable experience.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contact"
-                className="bg-pink-900 text-white px-8 py-4 rounded-xl font-semibold   transform hover:scale-105 transition-all duration-300 shadow-lg"
-              >
-                Get In Touch
-              </Link>
-              {/* <Link 
-                to="/culturalevents" 
-                className="border-2 border-pink-900 text-pink-900 px-8 py-4 rounded-xl font-semibold hover:bg-pink-900 hover:text-white transform hover:scale-105 transition-all duration-300"
-              >
-                View Our Events
-              </Link> */}
-            </div>
-          </div>
-        </div>
+    <div className="min-h-screen bg-white font-sans selection:bg-pink-100">
+      
+      {/* 1. HERO - Minimalist */}
+      <div className="pt-32 pb-16 px-6 text-center max-w-4xl mx-auto bg-gradient-to-b from-stone-50 to-white">
+        <span className="text-pink-900 text-xs font-bold uppercase tracking-[0.3em] mb-4 block">
+          Our Services
+        </span>
+        <h1 className="text-4xl md:text-6xl font-serif text-gray-900 mb-6 leading-tight">
+          We Design <span className="italic text-pink-900">Experiences</span>
+        </h1>
+        <p className="text-base md:text-lg text-gray-500 font-light leading-relaxed max-w-2xl mx-auto">
+          We don't just plan events; we curate moments. Explore our comprehensive suite of services designed to bring your vision to life.
+        </p>
       </div>
+
+      {/* 2. ZIG-ZAG SERVICE LIST */}
+      <div className="flex flex-col gap-16 pb-20 px-4 md:px-8 max-w-7xl mx-auto">
+        {services.map((service, index) => (
+          <div 
+            key={index} 
+            className="group grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-12 items-center bg-white border border-gray-100 md:border-none shadow-xl md:shadow-none rounded-2xl md:rounded-none overflow-hidden md:overflow-visible"
+          >
+            
+            {/* Image Side - Compact & Responsive */}
+            <div className={`relative w-full h-64 md:h-96 overflow-hidden rounded-none md:rounded-lg shadow-none md:shadow-2xl ${index % 2 === 1 ? 'md:order-2' : 'md:order-1'}`}>
+              <img 
+                src={service.image} 
+                alt={service.title} 
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+            </div>
+
+            {/* Content Side */}
+            <div className={`flex flex-col justify-center p-8 md:p-4 lg:p-12 ${index % 2 === 1 ? 'md:order-1' : 'md:order-2'}`}>
+              <div className="hidden md:block w-12 h-1 bg-pink-900 mb-6 transform origin-left group-hover:scale-x-150 transition-transform duration-500"></div>
+              
+              <h2 className="text-2xl md:text-4xl font-serif text-gray-900 mb-4 group-hover:text-pink-900 transition-colors">
+                {service.title}
+              </h2>
+              
+              <p className="text-gray-500 leading-relaxed mb-6 text-sm md:text-base font-light">
+                {service.description}
+              </p>
+
+              <ul className="mb-8 space-y-2">
+                {service.features.map((feature, i) => (
+                  <li key={i} className="flex items-center text-xs md:text-sm font-bold text-gray-800 uppercase tracking-wider">
+                    <span className="w-1.5 h-1.5 bg-pink-300 rounded-full mr-3"></span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              <div>
+                <Link to={service.link}>
+                  <button className="px-6 py-3 border border-gray-200 md:border-gray-900 text-gray-900 font-bold text-xs uppercase tracking-widest hover:bg-gray-900 hover:text-white transition-all duration-300 rounded-md md:rounded-none w-full md:w-auto">
+                    Explore Details
+                  </button>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        ))}
+      </div>
+
+      {/* 3. CTA */}
+      <div className="bg-stone-50 py-20 text-center px-6">
+        <h2 className="text-2xl md:text-4xl font-serif text-gray-900 mb-4">Have something else in mind?</h2>
+        <p className="text-gray-500 mb-8 max-w-lg mx-auto text-sm md:text-base">
+          We love unique challenges. Contact us for a custom consultation tailored to your specific needs.
+        </p>
+        <Link to="/contact">
+          <button className="bg-pink-900 text-white px-8 py-3 rounded-sm font-bold text-xs md:text-sm uppercase tracking-widest hover:bg-gray-900 transition-colors shadow-lg">
+            Get In Touch
+          </button>
+        </Link>
+      </div>
+
     </div>
   );
 };

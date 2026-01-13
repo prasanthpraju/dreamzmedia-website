@@ -57,6 +57,30 @@ const CulturalEvents = () => {
           </div>
         </div>
 
+         <div className="absolute top-24 left-4 md:top-32 md:left-10 z-10">
+          <button  
+            onClick={() => navigate('/')} 
+            className="group flex items-center gap-2 cursor-pointer text-gray-600 hover:text-pink-900 transition-colors duration-300"
+          >
+            {/* Icon */}
+            <div className="p-2 rounded-full border border-gray-400 group-hover:border-pink-900 group-hover:bg-pink-900 transition-all duration-300">
+              <svg 
+                className="w-3 h-3 md:w-4 md:h-4 text-gray-600 group-hover:text-white transition-colors" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+            </div>
+            
+            {/* Text (Hidden on very small screens, visible on mobile+) */}
+            <span className="text-[10px]   md:text-xs font-bold uppercase tracking-[0.2em] transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">
+              Back
+            </span>
+          </button>
+        </div>
+
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {images.map((image) => (
             <div key={image.id} onClick={() => openModal(image)} className="group relative aspect-[3/4] overflow-hidden bg-gray-100 cursor-pointer shadow-md hover:shadow-2xl transition-all duration-500 rounded-sm">

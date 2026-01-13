@@ -43,7 +43,7 @@ const Events = () => {
       {/* 1. Header Section */}
       <div className="relative pt-32 pb-12 text-center px-4 bg-gradient-to-b from-stone-50 to-white">
         
-        {/* Back Button */}
+        {/* Back to Home Button */}
         <div className="absolute top-28 left-4 md:left-8 z-10">
           <button 
             onClick={() => navigate('/')} 
@@ -89,7 +89,7 @@ const Events = () => {
 
       {/* 3. The Gallery Grid */}
       <div className="max-w-7xl mx-auto px-4 pb-24">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredEvents.map((item) => (
             <div 
               key={item.id} 

@@ -1,4 +1,5 @@
  import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const [currentYear] = useState(new Date().getFullYear());
@@ -6,26 +7,31 @@ const Footer = () => {
   const footerRef = useRef(null);
 
   const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About Us', href: '#about' },
-    { name: 'Our Services', href: '#services' },
-    { name: 'Eventscope', href: '#eventscope' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'FAQs', href: '#faqs' }
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Portfolio', href: '/events' },
+    { name: 'Services', href: '/WhatWeDo' },
+    { name: 'Contact', href: '/contact' }
+  ];
+
+  const services = [
+    { name: 'Corporate Events', href: '/events' },
+    { name: 'Wedding Planning', href: '/events' },
+    { name: 'School Events', href: '/events' },
+    { name: 'Catering', href: '/events' },
   ];
 
   const socialLinks = [
     { icon: 'fab fa-instagram', href: 'https://www.instagram.com', label: 'Instagram' },
     { icon: 'fab fa-twitter', href: 'https://www.twitter.com', label: 'Twitter' },
     { icon: 'fab fa-facebook-f', href: 'https://www.facebook.com', label: 'Facebook' },
-    { icon: 'fab fa-whatsapp', href: 'https://wa.me/919876543210', label: 'WhatsApp' },
-    { icon: 'fas fa-phone', href: 'tel:+919876543210', label: 'Call' }
+    { icon: 'fab fa-whatsapp', href: 'https://wa.me/919876543210', label: 'WhatsApp' }
   ];
 
   const contactInfo = [
-    { icon: 'fas fa-map-marker-alt', text: 'Arcod Rd, Vadapalani, Chennai, Tamil Nadu 600077' },
-    { icon: 'fas fa-phone-alt', text: '+91 9876543210' },
-    { icon: 'fas fa-envelope', text: 'dreamzmedia@gmail.com' }
+    { icon: 'fas fa-map-marker-alt', text: '123 Arcod Road, Vadapalani, Chennai - 600017' },
+    { icon: 'fas fa-phone-alt', text: '+91 98765 43210' },
+    { icon: 'fas fa-envelope', text: 'info@dreamzmedia.com' }
   ];
 
   useEffect(() => {
@@ -42,97 +48,105 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer ref={footerRef} className="relative bg-[#132440] text-white overflow-hidden">
+    <footer ref={footerRef} className="relative bg-gray-900 text-white overflow-hidden font-sans">
+      
+      {/* Decorative Top Border */}
+      <div className="h-1 w-full bg-gradient-to-r from-pink-900 via-pink-600 to-pink-900"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 lg:py-20">
 
-        {/* Main Content */}
-        <div className={`grid lg:grid-cols-2 gap-8 lg:gap-12 mb-12 lg:mb-16 transition-all duration-700 ${
+        <div className={`grid lg:grid-cols-12 gap-12 lg:gap-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           
-          {/* Left Section */}
-          <div className="space-y-6 lg:space-y-8 p-4 lg:p-6">
-            <h3 className="text-xl lg:text-2xl font-bold mb-4 text-white leading-tight">
-              What is the process for working with Dreamzmedia Events?
+          {/* 1. Brand / About Section (Col Span 4) */}
+          <div className="lg:col-span-4 space-y-6">
+            <h3 className="text-3xl font-serif font-bold text-white mb-4">
+              Dreamzmedia
             </h3>
-
-            <div className="space-y-3 lg:space-y-4">
-              <p className="text-gray-300 text-sm lg:text-base">
-                Do you offer customized packages for different types of events?
-              </p>
-              <p className="text-gray-300 text-sm lg:text-base">
-                How can I get a quote or consultation from Dreamzmedia Events?
-              </p>
+            <p className="text-gray-400 font-light leading-relaxed">
+              Crafting unforgettable experiences in Chennai since 2010. We blend strategy, creativity, and technology to bring your vision to life.
+            </p>
+            
+            {/* Social Icons */}
+            <div className="flex space-x-4 pt-4">
+              {socialLinks.map((social, i) => (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-pink-900 hover:text-white transition-all duration-300"
+                  aria-label={social.label}
+                >
+                  <i className={`${social.icon} text-sm`}></i>
+                </a>
+              ))}
             </div>
-
-            <button className="bg-[#1e385f] text-white font-semibold py-3 px-6 rounded-xl hover:bg-[#2a4a7a] transition-all w-full">
-              Get a Free Consultation
-            </button>
           </div>
 
-          {/* Right Section */}
-          <div className="grid md:grid-cols-2 gap-8">
-
-            {/* Quick Links */}
-            <div>
-              <h4 className="text-lg lg:text-xl font-bold mb-4">Quick Links</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {quickLinks.map((item, i) => (
-                  <a
-                    key={i}
-                    href={item.href}
-                    className="text-gray-300 hover:text-white transition-colors text-sm"
-                  >
+          {/* 2. Links Section (Col Span 2) */}
+          <div className="lg:col-span-2 space-y-6">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-pink-500 mb-6">Explore</h4>
+            <ul className="space-y-3">
+              {quickLinks.map((item, i) => (
+                <li key={i}>
+                  <Link to={item.href} className="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
                     {item.name}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h4 className="text-lg lg:text-xl font-bold mb-4">Address & Contact</h4>
-              <div className="space-y-4">
-                {contactInfo.map((info, i) => (
-                  <div key={i} className="flex items-start">
-                    <i className={`${info.icon} text-gray-400 mr-3`}></i>
-                    <p className="text-gray-300 text-sm">{info.text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
+
+           {/* 3. Services Section (Col Span 2) */}
+           <div className="lg:col-span-2 space-y-6">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-pink-500 mb-6">Services</h4>
+            <ul className="space-y-3">
+              {services.map((item, i) => (
+                <li key={i}>
+                  <Link to={item.href} className="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* 4. Contact Section (Col Span 4) */}
+          <div className="lg:col-span-4 space-y-6">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-pink-500 mb-6">Contact Us</h4>
+            <div className="space-y-4">
+              {contactInfo.map((info, i) => (
+                <div key={i} className="flex items-start group">
+                  <div className="mt-1 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center mr-4 group-hover:bg-pink-900 transition-colors">
+                    <i className={`${info.icon} text-xs text-gray-400 group-hover:text-white`}></i>
+                  </div>
+                  <p className="text-gray-400 group-hover:text-white transition-colors text-sm leading-relaxed pt-1.5">
+                    {info.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+            
+            <div className="pt-6">
+              <Link to="/contact">
+                <button className="w-full sm:w-auto bg-white text-gray-900 px-8 py-3 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-pink-900 hover:text-white transition-all duration-300">
+                  Request Consultation
+                </button>
+              </Link>
+            </div>
+          </div>
+
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-[#1e385f] mb-8"></div>
-
-        {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          
-          {/* Social Icons */}
-          <div className="flex space-x-4">
-            {socialLinks.map((social, i) => (
-              <a
-                key={i}
-                href={social.href}
-                className="w-12 h-12 bg-[#1e385f] rounded-xl flex items-center justify-center hover:bg-[#2a4a7a] transition"
-              >
-                <i className={`${social.icon} text-gray-300`}></i>
-              </a>
-            ))}
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-light">
+          <p>© {currentYear} Dreamzmedia Events. All Rights Reserved.</p>
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
-
-          {/* Copyright */}
-          <div className="text-center md:text-right mt-4 md:mt-0">
-            <p className="text-gray-400 text-sm">
-              ©{currentYear} | <span className="text-white font-bold">Dreamzmedia Events</span> | All Rights Reserved
-            </p>
-            <p className="text-gray-500 text-xs mt-1">Crafting Unforgettable Experiences in Chennai</p>
-          </div>
-
         </div>
 
       </div>

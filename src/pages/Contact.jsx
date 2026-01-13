@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+ import React, { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
-import emailjs from "@emailjs/browser"; //
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
-  const formRef = useRef(); //
+  const formRef = useRef();
   
   // State for form data
   const [formData, setFormData] = useState({
@@ -19,22 +19,10 @@ const Contact = () => {
   const [status, setStatus] = useState({ type: '', message: '' });
 
   // Animation states
-  const [isVisible, setIsVisible] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { ref, inView } = useInView({
     threshold: 0.2,
     triggerOnce: true
   });
-
-  useEffect(() => {
-    if (inView) setIsVisible(true);
-  }, [inView]);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -48,36 +36,34 @@ const Contact = () => {
     setLoading(true);
     setStatus({ type: '', message: '' });
 
-    // EmailJS Integration
-    emailjs   
+    // Replace these with your actual EmailJS credentials
+    emailjs
       .send(
-        "service_4d0dvsb", // Replace with your Service ID
-        "template_jqiq3id", // Replace with your Template ID
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
         {
           from_name: formData.name,
           from_email: formData.email,
           phone: formData.phone,
           company: formData.company,
           location: formData.location,
-          to_name: "Dreamzmedia Team", // Optional: Customize receiver name
+          to_name: "Dreamzmedia Team",
         },
-        "ZwXyGVw--MsSVKDEJ" // Replace with your Public Key
+        "YOUR_PUBLIC_KEY"
       )
       .then(
         (result) => {
-          console.log(result.text); //
+          console.log(result.text);
           setLoading(false);
           setStatus({
             type: 'success',
             message: 'Thank you! Your message has been sent successfully.'
           });
-          setFormData({ name: '', phone: '', email: '', company: '', location: '' }); // Reset form
-          
-          // Clear success message after 5 seconds
+          setFormData({ name: '', phone: '', email: '', company: '', location: '' });
           setTimeout(() => setStatus({ type: '', message: '' }), 5000);
         },
         (error) => {
-          console.log(error.text); //
+          console.log(error.text);
           setLoading(false);
           setStatus({
             type: 'error',
@@ -87,227 +73,203 @@ const Contact = () => {
       );
   };
 
-  const features = [
-    { title: "End-to-End Event Solutions", description: "From Concept to Celebration" },
-    { title: "500+ Corporate Clients", description: "Trusted by leading companies" },
-    { title: "Creative Customized Experiences", description: "That Leave a Lasting Impact" }
-  ];
-
   const contactInfo = [
-    { detail: "123 Arcord Road, Vadapalani, Chennai - 600017", type: "location" },
-    { detail: "+91 98765 43210", type: "phone" },
-    { detail: "info@dreamzmedia.com", type: "email" }
+    { 
+      label: "Address",
+      detail: "123 Arcord Road, Vadapalani, Chennai - 600017", 
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      )
+    },
+    { 
+      label: "Phone",
+      detail: "+91 98765 43210", 
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+        </svg>
+      )
+    },
+    { 
+      label: "Email",
+      detail: "info@dreamzmedia.com", 
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      )
+    }
   ];
 
   return (
-    <section 
-      id="contact" 
-      ref={ref}
-      className="relative py-20 min-h-screen overflow-hidden bg-gradient-to-br from-pink-50 via-white to-rose-50"
-      style={{ marginTop: '80px' }}
-    >
-      {/* Background Animation (Kept as is) */}
-      <div className="absolute inset-0">
-        <div 
-          className="absolute top-1/4 left-1/4 w-72 h-72 bg-pink-200/35 rounded-full blur-3xl animate-wave-move"
-          style={{ transform: `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.02}px)` }}
-        ></div>
-        {/* ... (rest of your background animations remain the same) */}
-        <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-rose-200/35 rounded-full blur-3xl animate-wave-move-reverse"></div>
-        <div className="absolute top-1/3 right-1/5 w-40 h-40 bg-pink-300/20 rounded-full animate-pulse-slow"></div>
-        <div className="absolute bottom-1/4 left-1/5 w-32 h-32 bg-rose-300/20 rounded-full animate-pulse-delayed"></div>
-        <div className="absolute inset-0 opacity-5">
-          <div className="w-full h-full bg-diagonal-pattern animate-diagonal-move"></div>
-        </div>
+    <section ref={ref} className="min-h-screen bg-stone-50 font-sans selection:bg-pink-100">
+      
+      {/* 1. Header Section */}
+      <div className="pt-32 pb-16 lg:pt-40 lg:pb-24 text-center px-6 bg-gradient-to-b from-white to-stone-50">
+        <span className="text-pink-900 text-xs font-bold uppercase tracking-[0.3em] mb-4 block animate-fade-in">
+          Get in Touch
+        </span>
+        <h1 className="text-5xl md:text-7xl font-serif text-gray-900 mb-6 tracking-tight">
+          Contact <span className="italic text-pink-900">Dreamzmedia</span>
+        </h1>
+        <div className="w-24 h-1 bg-pink-900 mx-auto mb-8 rounded-full"></div>
+        <p className="max-w-2xl mx-auto text-lg text-gray-500 font-light leading-relaxed">
+          Ready to start planning your event? We'd love to hear from you. 
+          Fill out the form below or reach out directly.
+        </p>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className={`text-center mb-16 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Contact <span className="text-pink-900">Dreamzmedia</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Let's Create Unforgettable Experiences Together
-          </p>
-          <div className="w-24 h-1 bg-pink-900 mx-auto mt-6 rounded-full"></div>
-        </div>
-
-        {/* Main Content */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
+      <div className="max-w-7xl mx-auto px-6 pb-24">
+        
+        {/* 2. Main Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           
-          {/* Contact Form */}
-          <div className={`transform transition-all duration-700 delay-700 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
-            <div className="group relative bg-white rounded-2xl border border-gray-200 p-8 shadow-xl hover:shadow-2xl transition-all duration-500">
-              
+          {/* Left: Contact Form */}
+          <div className={`transform transition-all duration-1000 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <div className="bg-white p-10 md:p-12 shadow-2xl rounded-sm border border-gray-100 relative overflow-hidden">
+              {/* Decorative background element */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-pink-50 rounded-bl-full -z-0"></div>
+
               <div className="relative z-10">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
-                    Book Your Free Consultation
-                  </h3>
-                  <p className="text-gray-600">Get in touch with our event experts</p>
-                </div>
+                <h3 className="text-2xl font-serif font-bold text-gray-900 mb-8">
+                  Send us a Message
+                </h3>
 
                 {/* Status Message */}
                 {status.message && (
-                  <div className={`mb-6 p-4 rounded-lg text-sm font-medium text-center ${
+                  <div className={`mb-8 p-4 text-sm font-medium text-center border-l-4 ${
                     status.type === 'success' 
-                      ? 'bg-green-50 text-green-800 border border-green-200' 
-                      : 'bg-red-50 text-red-800 border border-red-200'
+                      ? 'bg-green-50 text-green-800 border-green-500' 
+                      : 'bg-red-50 text-red-800 border-red-500'
                   }`}>
                     {status.message}
                   </div>
                 )}
 
-                <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name *</label>
+                <form ref={formRef} className="space-y-8" onSubmit={handleSubmit}>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="group">
+                      <label className="block text-xs font-bold uppercase tracking-widest text-gray-600 mb-2 group-focus-within:text-pink-900 transition-colors">Name</label>
                       <input
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-900 focus:border-pink-900 transition-all duration-300"
-                        placeholder="Enter your full name"
+                        className="w-full pb-2 border-b border-gray-300 bg-transparent focus:border-pink-900 focus:outline-none text-gray-900 placeholder-gray-300 transition-colors"
+                        placeholder="Enter your name"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone *</label>
+                    <div className="group">
+                      <label className="block text-xs font-bold uppercase tracking-widest text-gray-600 mb-2 group-focus-within:text-pink-900 transition-colors">Phone</label>
                       <input
                         type="tel"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-900 focus:border-pink-900 transition-all duration-300"
-                        placeholder="Enter your phone number"
+                        className="w-full pb-2 border-b border-gray-300 bg-transparent focus:border-pink-900 focus:outline-none text-gray-900 placeholder-gray-300 transition-colors"
+                        placeholder="+91 "
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email *</label>
+                  <div className="group">
+                    <label className="block text-xs font-bold uppercase tracking-widest text-gray-600 mb-2 group-focus-within:text-pink-900 transition-colors">Email</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-900 focus:border-pink-900 transition-all duration-300"
+                      className="w-full pb-2 border-b border-gray-300 bg-transparent focus:border-pink-900 focus:outline-none text-gray-900 placeholder-gray-300 transition-colors"
                       placeholder="Enter your email address"
                     />
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="company" className="block text-sm font-medium text-gray-700">Company Name</label>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="group">
+                      <label className="block text-xs font-bold uppercase tracking-widest text-gray-600 mb-2 group-focus-within:text-pink-900 transition-colors">Company</label>
                       <input
                         type="text"
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-900 focus:border-pink-900 transition-all duration-300"
-                        placeholder="Enter company name"
+                        className="w-full pb-2 border-b border-gray-300 bg-transparent focus:border-pink-900 focus:outline-none text-gray-900 placeholder-gray-300 transition-colors"
+                        placeholder="Optional"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <label htmlFor="location" className="block text-sm font-medium text-gray-700">Location</label>
+                    <div className="group">
+                      <label className="block text-xs font-bold uppercase tracking-widest text-gray-600 mb-2 group-focus-within:text-pink-900 transition-colors">Location</label>
                       <input
                         type="text"
                         name="location"
                         value={formData.location}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-900 focus:border-pink-900 transition-all duration-300"
-                        placeholder="Enter your location"
+                        className="w-full pb-2 border-b border-gray-300 bg-transparent focus:border-pink-900 focus:outline-none text-gray-900 placeholder-gray-300 transition-colors"
+                        placeholder="City, Country"
                       />
                     </div>
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className={`w-full bg-gradient-to-r from-pink-900 to-rose-900 text-white py-4 px-6 rounded-xl font-bold text-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
-                      loading ? 'opacity-70 cursor-not-allowed' : ''
-                    }`}
-                  >
-                    {loading ? (
-                      <span className="flex items-center justify-center">
-                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        SENDING...
-                      </span>
-                    ) : (
-                      'BOOK A FREE CONSULTATION'
-                    )}
-                  </button>
+                  <div className="pt-4">
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className={`w-full bg-pink-900 text-white py-4 px-8 uppercase text-xs font-bold tracking-widest hover:bg-pink-800 transition-all duration-300 shadow-lg hover:shadow-xl ${
+                        loading ? 'opacity-70 cursor-not-allowed' : ''
+                      }`}
+                    >
+                      {loading ? 'Sending...' : 'Request Consultation'}
+                    </button>
+                  </div>
                 </form>
-              </div>
-              
-              {/* Border Decor */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-900 to-rose-900 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10">
-                <div className="absolute inset-[2px] rounded-2xl bg-white"></div>
               </div>
             </div>
           </div>
 
-          {/* Map & Info Section (Kept as is) */}
-          <div className={`space-y-8 transform transition-all duration-700 delay-900 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
-             {/* ... Your existing map and contact info code ... */}
-             <div className="group relative bg-white rounded-2xl border border-gray-200 p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
-               <div className="relative z-10">
-                 <div className="text-center mb-6">
-                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Visit Our Office</h3>
-                   <p className="text-gray-600">Come discuss your event ideas with us</p>
-                 </div>
-                 
-                 <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden mb-6">
-                   <iframe
-                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.683577579543!2d80.20934537575394!3d13.055802113025213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52669177353ee1%3A0xe21f57732da3b437!2sVadapalani%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1709825631234!5m2!1sen!2sin"
-                     width="100%"
-                     height="300"
-                     style={{ border: 0, borderRadius: '10px' }}
-                     allowFullScreen=""
-                     loading="lazy"
-                     referrerPolicy="no-referrer-when-downgrade"
-                     title="Dreamzmedia Chennai Office Location"
-                     className="rounded-xl transform group-hover:scale-105 transition-transform duration-700"
-                   ></iframe>
-                 </div>
-
-                 <div className="space-y-4">
-                   {contactInfo.map((info, index) => (
-                     <div key={index} className="group flex items-center space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-300">
-                       <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-pink-900 to-rose-900 rounded-full flex items-center justify-center text-white">
-                         {/* Simple Icon based on type */}
-                         {info.type === 'location' && <span>📍</span>}
-                         {info.type === 'phone' && <span>📞</span>}
-                         {info.type === 'email' && <span>✉️</span>}
-                       </div>
-                       <span className="text-gray-700 font-medium">{info.detail}</span>
+          {/* Right: Info & Map */}
+          <div className={`space-y-12 transform transition-all duration-1000 delay-300 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+             
+             {/* Contact Details */}
+             <div className="space-y-8">
+               <h3 className="text-2xl font-serif font-bold text-gray-900">Contact Information</h3>
+               <div className="space-y-6">
+                 {contactInfo.map((info, index) => (
+                   <div key={index} className="flex items-start group">
+                     <div className="w-12 h-12 bg-white border border-gray-100 shadow-sm flex items-center justify-center text-pink-900 group-hover:bg-pink-900 group-hover:text-white transition-all duration-300 shrink-0 mr-6">
+                       {info.icon}
                      </div>
-                   ))}
-                 </div>
+                     <div>
+                       <span className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">{info.label}</span>
+                       <span className="text-lg text-gray-800 font-light">{info.detail}</span>
+                     </div>
+                   </div>
+                 ))}
                </div>
              </div>
+
+             {/* Map */}
+             <div className="relative w-full h-[400px] bg-gray-200 shadow-lg border-8 border-white">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.685370241957!2d80.20935307481944!3d13.055675487267496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5266eb201103ad%3A0x7d2871f37e8c187d!2sVadapalani%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1709664562085!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Dreamzmedia Location"
+                  className="filter grayscale hover:grayscale-0 transition-all duration-700"
+                ></iframe>
+             </div>
+
           </div>
         </div>
       </div>
-
-      {/* Global CSS (Retained from your original code) */}
-      <style>{`
-        /* ... Your existing CSS animations ... */
-        .bg-diagonal-pattern {
-          background-image: linear-gradient(45deg, rgba(244, 114, 182, 0.05) 25%, transparent 25%),
-                            linear-gradient(-45deg, rgba(244, 114, 182, 0.05) 25%, transparent 25%),
-                            linear-gradient(45deg, transparent 75%, rgba(244, 114, 182, 0.05) 75%),
-                            linear-gradient(-45deg, transparent 75%, rgba(244, 114, 182, 0.05) 75%);
-          background-size: 20px 20px;
-        }
-      `}</style>
     </section>
   );
 };

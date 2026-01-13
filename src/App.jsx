@@ -57,7 +57,7 @@ function App() {
         <Route path='/events' element={<Events/>}/>
 
         {/* Corporate Routes */}
-        <Route path='/conference' element={<CorporateGift/>}/> {/* Note: You mapped '/conference' to CorporateGift in your code. Should this be <Conference/>? */}
+        <Route path='/conference' element={<Conference/>}/> {/* Note: You mapped '/conference' to CorporateGift in your code. Should this be <Conference/>? */}
         <Route path='/wedding-events' element={<Wedding/>}/>
         <Route path='/dealersmeet' element={<DealersMeet/>}/>
         <Route path='/culturalevents' element={<CulturalEvents/>}/>

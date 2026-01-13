@@ -16,111 +16,109 @@ const Navbar = () => {
   }, []);
 
   const isHome = location.pathname === "/";
+  const logoFilter = (!isScrolled && isHome && !isMenuOpen) ? "brightness(0) invert(1)" : "none";
 
-  // Updated Navigation Items
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
-    { name: "Portfolio", path: "/events" }, // CHANGED THIS LINK
+    { name: "About", path: "/about" },
+    { name: "Portfolio", path: "/events" },
     { name: "Services", path: "/WhatWeDo" }
   ];
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-500 ease-in-out ${
-        isScrolled
-          ? "bg-white/90 backdrop-blur-md shadow-sm py-3"
-          : "bg-transparent py-6"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${
+        isScrolled || isMenuOpen
+          ? "bg-white/90 backdrop-blur-lg border-b border-gray-100 py-3 shadow-sm"
+          : "bg-transparent py-4 lg:py-6"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="flex items-center justify-between h-16 relative">
 
-          {/* Logo */}
-          <div className="flex-shrink-0 cursor-pointer">
-            <Link to="/">
-              {/* Add a filter drop-shadow for better visibility on dark backgrounds if needed */}
-              <img src={logo} className="w-32 md:w-40 transition-all duration-300" alt="Logo" />
+          {/* --- LOGO: Adaptive Positioning --- */}
+          {/* Mobile: Standard Left | Desktop: Absolute "Overlapping" Masthead */}
+          <div className="relative lg:absolute lg:top-1/2 lg:left-0 lg:-translate-y-1/2 z-50 lg:pl-4 transition-all duration-300">
+            <Link to="/" onClick={() => setIsMenuOpen(false)}>
+              <img 
+                src={logo} 
+                className="w-28 sm:w-32 md:w-40 lg:w-56 transition-all duration-500 hover:opacity-90" 
+                alt="Dreamzmedia" 
+                style={{ filter: logoFilter }} 
+              />
             </Link>
           </div>
 
-          {/* Desktop Menu - Refined Typography */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+          {/* --- DESKTOP MENU --- */}
+          <div className="hidden lg:flex items-center justify-center w-full">
+            <div className="flex space-x-12">
               {navItems.map((item) => {
                 const isActive = location.pathname === item.path;
-                
-                // Dynamic Text Color Logic
-                let textColor = "text-gray-800"; // Default
-                if (!isScrolled && isHome) textColor = "text-white"; // White on Hero
-                if (isActive) textColor = "text-pink-700"; // Active State
-
                 return (
                   <Link
                     key={item.name}
                     to={item.path}
-                    className={`relative group px-2 py-2 text-sm font-bold uppercase tracking-widest transition-colors duration-300 ${textColor} hover:text-pink-600`}
+                    className={`text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 relative group py-2
+                      ${!isScrolled && isHome 
+                        ? "text-white/90 hover:text-white" 
+                        : "text-gray-600 hover:text-pink-900"
+                      } ${isActive ? "text-pink-500" : ""}`}
                   >
                     {item.name}
-                    {/* Animated Underline */}
-                    <span className={`absolute left-0 bottom-0 w-full h-0.5 bg-pink-600 transform origin-left transition-transform duration-300 ${isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
+                    <span className={`absolute bottom-0 left-1/2 w-0 h-[2px] bg-current transform -translate-x-1/2 transition-all duration-300 group-hover:w-full ${isActive ? 'w-full' : ''}`}></span>
                   </Link>
                 );
               })}
-
-              {/* Contact Button - Outline Style for Modern Look */}
-              <Link to="/contact">
-                <button
-                  className={`ml-4 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest border transition-all duration-300 transform hover:scale-105
-                  ${isScrolled 
-                    ? "border-pink-900 text-pink-900 hover:bg-pink-900 hover:text-white" 
-                    : isHome 
-                      ? "border-white text-white hover:bg-white hover:text-black"
-                      : "border-black text-black hover:bg-black hover:text-white"
-                  }`}
-                >
-                  Get in Touch
-                </button>
-              </Link>
             </div>
           </div>
 
-          {/* Mobile Menu Button - Hamburger */}
-          <div className="md:hidden">
-            <button onClick={toggleMenu} className="p-2 text-pink-900 focus:outline-none">
+          {/* --- DESKTOP CTA --- */}
+          <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2">
+             <Link to="/contact">
+              <button
+                className={`px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all duration-300 hover:-translate-y-0.5
+                ${!isScrolled && isHome 
+                  ? "border-white/30 text-white hover:bg-white hover:text-black hover:border-white" 
+                  : "border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white"
+                }`}
+              >
+                Get in Touch
+              </button>
+            </Link>
+          </div>
+
+          {/* --- MOBILE HAMBURGER --- */}
+          <div className="lg:hidden z-50">
+            <button onClick={toggleMenu} className="p-2 focus:outline-none touch-manipulation">
               <div className="w-6 flex flex-col items-end gap-1.5">
-                <span className={`h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? "w-6 rotate-45 translate-y-2" : "w-6"}`} />
-                <span className={`h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? "opacity-0" : "w-4"}`} />
-                <span className={`h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? "w-6 -rotate-45 -translate-y-2" : "w-2"}`} />
+                <span className={`h-0.5 rounded-full transition-all duration-300 ${!isScrolled && isHome && !isMenuOpen ? "bg-white" : "bg-black"} ${isMenuOpen ? "w-6 rotate-45 translate-y-2 bg-black" : "w-6"}`} />
+                <span className={`h-0.5 rounded-full transition-all duration-300 ${!isScrolled && isHome && !isMenuOpen ? "bg-white" : "bg-black"} ${isMenuOpen ? "opacity-0" : "w-4"}`} />
+                <span className={`h-0.5 rounded-full transition-all duration-300 ${!isScrolled && isHome && !isMenuOpen ? "bg-white" : "bg-black"} ${isMenuOpen ? "w-6 -rotate-45 -translate-y-2 bg-black" : "w-6"}`} />
               </div>
             </button>
           </div>
+
         </div>
 
-        {/* Mobile Menu - Full Screen Glass Overlay */}
-        <div
-          className={`fixed inset-0 bg-white/95 backdrop-blur-xl z-40 transition-transform duration-500 ease-in-out md:hidden flex flex-col items-center justify-center space-y-8 ${
-            isMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-          style={{ top: 0 }}
+        {/* --- MOBILE MENU OVERLAY --- */}
+        <div 
+          className={`fixed inset-0 bg-white z-40 transition-transform duration-500 cubic-bezier(0.77, 0, 0.175, 1) lg:hidden flex flex-col items-center justify-center space-y-8 ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+          style={{ height: '100dvh' }} // Use dynamic viewport height
         >
-          <button onClick={() => setIsMenuOpen(false)} className="absolute top-6 right-6 text-3xl text-gray-500">&times;</button>
-          
           {navItems.map((item) => (
             <Link
               key={item.name}
               to={item.path}
               onClick={() => setIsMenuOpen(false)}
-              className="text-2xl font-serif font-medium text-gray-900 hover:text-pink-700 transition-colors"
+              className="text-3xl font-serif text-gray-900 hover:text-pink-600 transition-colors"
             >
               {item.name}
             </Link>
           ))}
-
           <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-            <button className="mt-4 px-8 py-3 bg-pink-900 text-white rounded-full text-sm font-bold uppercase tracking-widest shadow-xl">
-              Contact Us
-            </button>
+             <button className="mt-8 px-12 py-4 bg-black text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-xl">
+               Start Project
+             </button>
           </Link>
         </div>
       </div>
