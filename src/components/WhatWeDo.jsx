@@ -90,7 +90,7 @@ const WhatWeDo = () => {
 
               <div>
                 <Link to={service.link}>
-                  <button className="px-6 py-3 border border-gray-200 md:border-gray-900 text-gray-900 font-bold text-xs uppercase tracking-widest hover:bg-gray-900 hover:text-white transition-all duration-300 rounded-md md:rounded-none w-full md:w-auto">
+                  <button className="px-6 py-3 border cursor-pointer border-gray-200 md:border-gray-900 text-gray-900 font-bold text-xs uppercase tracking-widest hover:bg-gray-900 hover:text-white transition-all duration-300 rounded-md md:rounded-none w-full md:w-auto">
                     Explore Details
                   </button>
                 </Link>
@@ -108,7 +108,7 @@ const WhatWeDo = () => {
           We love unique challenges. Contact us for a custom consultation tailored to your specific needs.
         </p>
         <Link to="/contact">
-          <button className="bg-pink-900 text-white px-8 py-3 rounded-sm font-bold text-xs md:text-sm uppercase tracking-widest hover:bg-gray-900 transition-colors shadow-lg">
+          <button className="bg-pink-900 cursor-pointer text-white px-8 py-3 rounded-sm font-bold text-xs md:text-sm uppercase tracking-widest hover:bg-gray-900 transition-colors shadow-lg">
             Get In Touch
           </button>
         </Link>

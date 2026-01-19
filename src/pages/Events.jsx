@@ -47,7 +47,7 @@ const Events = () => {
         <div className="absolute top-28 left-4 md:left-8 z-10">
           <button 
             onClick={() => navigate('/')} 
-            className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-pink-900 transition-colors"
+            className="flex items-center gap-2 text-sm cursor-pointer font-bold uppercase tracking-widest text-gray-500 hover:text-pink-900 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
             <span className="hidden md:inline">Home</span>
@@ -74,7 +74,7 @@ const Events = () => {
                 key={cat}
                 onClick={() => setActiveTab(cat)}
                 className={`
-                  px-5 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300
+                  px-5 py-2 rounded-full cursor-pointer text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300
                   ${activeTab === cat 
                     ? "bg-pink-900 text-white shadow-md" 
                     : "bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-900"}

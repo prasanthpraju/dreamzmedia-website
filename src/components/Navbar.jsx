@@ -7,16 +7,16 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled(window.scrollY > 10); // Trigger shadow earlier
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isHome = location.pathname === "/";
-  const logoFilter = (!isScrolled && isHome && !isMenuOpen) ? "brightness(0) invert(1)" : "none";
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
+  }, [isMenuOpen]);
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -26,104 +26,110 @@ const Navbar = () => {
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${
-        isScrolled || isMenuOpen
-          ? "bg-white/90 backdrop-blur-lg border-b border-gray-100 py-3 shadow-sm"
-          : "bg-transparent py-4 lg:py-6"
-      }`}
-    >
-      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="flex items-center justify-between h-16 relative">
+    <>
+      <nav
+        // HEIGHT DEFINITION: h-16 (mobile) and h-20 (desktop)
+        // This matches the margins in HeroSection
+        className={`fixed top-0 left-0 w-full z-50 bg-white transition-all duration-300 flex items-center h-16 lg:h-20 ${
+          isScrolled ? "shadow-md" : ""
+        }`}
+      >
+        <div className="w-full max-w-[1920px] mx-auto px-6 lg:px-12">
+          <div className="flex items-center justify-between">
 
-          {/* --- LOGO: Adaptive Positioning --- */}
-          {/* Mobile: Standard Left | Desktop: Absolute "Overlapping" Masthead */}
-          <div className="relative lg:absolute lg:top-1/2 lg:left-0 lg:-translate-y-1/2 z-50 lg:pl-4 transition-all duration-300">
-            <Link to="/" onClick={() => setIsMenuOpen(false)}>
-              <img 
-                src={logo} 
-                className="w-28 sm:w-32 md:w-40 lg:w-56 transition-all duration-500 hover:opacity-90" 
-                alt="Dreamzmedia" 
-                style={{ filter: logoFilter }} 
-              />
-            </Link>
-          </div>
-
-          {/* --- DESKTOP MENU --- */}
-          <div className="hidden lg:flex items-center justify-center w-full">
-            <div className="flex space-x-12">
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    className={`text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 relative group py-2
-                      ${!isScrolled && isHome 
-                        ? "text-white/90 hover:text-white" 
-                        : "text-gray-600 hover:text-pink-900"
-                      } ${isActive ? "text-pink-500" : ""}`}
-                  >
-                    {item.name}
-                    <span className={`absolute bottom-0 left-1/2 w-0 h-[2px] bg-current transform -translate-x-1/2 transition-all duration-300 group-hover:w-full ${isActive ? 'w-full' : ''}`}></span>
-                  </Link>
-                );
-              })}
+            {/* --- LOGO --- */}
+            <div className="flex-shrink-0 z-50">
+              <Link to="/" onClick={() => setIsMenuOpen(false)}>
+                <img 
+                  src={logo} 
+                  className="w-28 md:w-36 object-contain" 
+                  alt="Dreamzmedia" 
+                />
+              </Link>
             </div>
-          </div>
 
-          {/* --- DESKTOP CTA --- */}
-          <div className="hidden lg:block absolute right-0 top-1/2 transform -translate-y-1/2">
-             <Link to="/contact">
-              <button
-                className={`px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all duration-300 hover:-translate-y-0.5
-                ${!isScrolled && isHome 
-                  ? "border-white/30 text-white hover:bg-white hover:text-black hover:border-white" 
-                  : "border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white"
-                }`}
-              >
-                Get in Touch
-              </button>
-            </Link>
-          </div>
-
-          {/* --- MOBILE HAMBURGER --- */}
-          <div className="lg:hidden z-50">
-            <button onClick={toggleMenu} className="p-2 focus:outline-none touch-manipulation">
-              <div className="w-6 flex flex-col items-end gap-1.5">
-                <span className={`h-0.5 rounded-full transition-all duration-300 ${!isScrolled && isHome && !isMenuOpen ? "bg-white" : "bg-black"} ${isMenuOpen ? "w-6 rotate-45 translate-y-2 bg-black" : "w-6"}`} />
-                <span className={`h-0.5 rounded-full transition-all duration-300 ${!isScrolled && isHome && !isMenuOpen ? "bg-white" : "bg-black"} ${isMenuOpen ? "opacity-0" : "w-4"}`} />
-                <span className={`h-0.5 rounded-full transition-all duration-300 ${!isScrolled && isHome && !isMenuOpen ? "bg-white" : "bg-black"} ${isMenuOpen ? "w-6 -rotate-45 -translate-y-2 bg-black" : "w-6"}`} />
+            {/* --- DESKTOP MENU --- */}
+            <div className="hidden lg:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="flex items-center space-x-10">
+                {navItems.map((item) => {
+                  const isActive = location.pathname === item.path;
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      className={`text-[11px] font-bold uppercase tracking-[0.2em] py-2 relative group transition-colors duration-300
+                        ${isActive ? "text-pink-600" : "text-gray-800 hover:text-pink-600"}`}
+                    >
+                      {item.name}
+                      <span className={`absolute bottom-0 left-1/2 h-[2px] bg-pink-600 transform -translate-x-1/2 transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                    </Link>
+                  );
+                })}
               </div>
-            </button>
+            </div>
+
+            {/* --- RIGHT CTA --- */}
+            <div className="hidden lg:block z-50">
+               <Link to="/contact">
+                <button
+                  className="px-6 py-2.5 cursor-pointer rounded-sm text-[10px] font-bold uppercase tracking-widest border border-gray-900 bg-gray-900 text-white transition-all duration-300 hover:bg-white hover:text-gray-900 hover:shadow-lg"
+                >
+                  Get in Touch
+                </button>
+              </Link>
+            </div>
+
+            {/* --- MOBILE HAMBURGER --- */}
+            <div className="lg:hidden z-50">
+              <button onClick={() => setIsMenuOpen(true)} className="p-2">
+                 <div className="space-y-1.5">
+                    <span className="block w-6 h-0.5 bg-black"></span>
+                    <span className="block w-4 h-0.5 bg-black ml-auto"></span>
+                    <span className="block w-6 h-0.5 bg-black"></span>
+                 </div>
+              </button>
+            </div>
+
           </div>
-
         </div>
+      </nav>
 
-        {/* --- MOBILE MENU OVERLAY --- */}
-        <div 
-          className={`fixed inset-0 bg-white z-40 transition-transform duration-500 cubic-bezier(0.77, 0, 0.175, 1) lg:hidden flex flex-col items-center justify-center space-y-8 ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
-          style={{ height: '100dvh' }} // Use dynamic viewport height
-        >
+      {/* --- MOBILE DRAWER --- */}
+      <div 
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] transition-opacity duration-300 lg:hidden ${
+          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+      />
+      <div 
+        className={`fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white z-[70] shadow-2xl transform transition-transform duration-500 cubic-bezier(0.77, 0, 0.175, 1) lg:hidden flex flex-col ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center p-6 border-b border-gray-100">
+           <img src={logo} className="w-24" alt="Logo" />
+           <button onClick={() => setIsMenuOpen(false)} className="p-2 text-2xl text-gray-500 hover:text-black">&times;</button>
+        </div>
+        <div className="flex flex-col px-8 py-8 space-y-6">
           {navItems.map((item) => (
             <Link
               key={item.name}
               to={item.path}
               onClick={() => setIsMenuOpen(false)}
-              className="text-3xl font-serif text-gray-900 hover:text-pink-600 transition-colors"
+              className="text-lg font-medium text-gray-900 border-b border-gray-50 pb-3"
             >
               {item.name}
             </Link>
           ))}
-          <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-             <button className="mt-8 px-12 py-4 bg-black text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-xl">
-               Start Project
-             </button>
+           <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
+              <button className="w-full mt-4 py-4 bg-gray-900 text-white text-xs font-bold uppercase tracking-widest rounded-sm">
+                Start Project
+              </button>
           </Link>
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
-export default Navbar;
+export default Navbar;  

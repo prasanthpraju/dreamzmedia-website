@@ -1,5 +1,13 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import c1 from "../../assets/Conference/c1.png";
+import c2 from "../../assets/Conference/c2.png";
+import c3 from "../../assets/Conference/c3.png";
+import c4 from "../../assets/Conference/c4.png";
+import c5 from "../../assets/Conference/c5.png";
+import c6 from "../../assets/Conference/c6.png";
+import c7 from "../../assets/Conference/c7.png";
+import c8 from "../../assets/Conference/c8.png";
 
 const Conference = () => {
   const navigate = useNavigate();
@@ -7,17 +15,24 @@ const Conference = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const quickLinks = [
-    "Conference", "DealersMeet", "CulturalEvents", "StageandMusic", 
-    "CSRActivities", "CorporateGift", "EventsCatering"
+    "Conference",
+    "DealersMeet",
+    "CulturalEvents",
+    "StageandMusic",
+    "CSRActivities",
+    "CorporateGift",
+    "EventsCatering",
   ];
 
   const images = [
-    { id: 1, src: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" },
-    { id: 2, src: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" },
-    { id: 3, src: "https://images.unsplash.com/photo-1475721027767-p2d810ca202d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" },
-    { id: 4, src: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" },
-    { id: 5, src: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" },
-    { id: 6, src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" }
+    { id: 1, src: c1 },
+    { id: 2, src: c2 },
+    { id: 3, src: c3 },
+    { id: 4, src: c4 },
+    { id: 5, src: c5 },
+    { id: 6, src: c6 },
+    { id: 7, src: c7 },
+    { id: 8, src: c8 },
   ];
 
   const openModal = (image) => {
@@ -39,28 +54,31 @@ const Conference = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans">
-      
       {/* Header with Back Button */}
       <div className="relative pt-32 pb-12 px-6 text-center border-b border-gray-100">
-        
         {/* --- BACK BUTTON START --- */}
         <div className="absolute top-24 left-4 md:top-32 md:left-10 z-10">
-          <button  
-            onClick={() => navigate('/')} 
+          <button
+            onClick={() => navigate("/")}
             className="group flex items-center gap-2 cursor-pointer text-gray-600 hover:text-pink-900 transition-colors duration-300"
           >
             {/* Icon */}
             <div className="p-2 rounded-full border border-gray-400 group-hover:border-pink-900 group-hover:bg-pink-900 transition-all duration-300">
-              <svg 
-                className="w-3 h-3 md:w-4 md:h-4 text-gray-600 group-hover:text-white transition-colors" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="w-3 h-3 md:w-4 md:h-4 text-gray-600 group-hover:text-white transition-colors"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
               </svg>
             </div>
-            
+
             {/* Text (Hidden on very small screens, visible on mobile+) */}
             <span className="text-[10px]   md:text-xs font-bold uppercase tracking-[0.2em] transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">
               Back
@@ -69,7 +87,9 @@ const Conference = () => {
         </div>
         {/* --- BACK BUTTON END --- */}
 
-        <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 tracking-tight mb-4">Conference</h1>
+        <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 tracking-tight mb-4">
+          Conference
+        </h1>
         <div className="w-24 h-1.5 bg-pink-900 mx-auto mt-4"></div>
       </div>
 
@@ -80,14 +100,18 @@ const Conference = () => {
             <h3 className="text-2xl font-serif font-bold text-pink-900 mb-8 border-l-4 border-pink-900 pl-4">
               Collections
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-5">
               {quickLinks.map((link, idx) => (
                 <li key={idx}>
-                  <button 
-                    onClick={() => navigate(`/${link.toLowerCase().replace(/\s+/g, '-')}`)} 
-                    className={`text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:text-pink-900 hover:translate-x-2 cursor-pointer w-full text-left ${link === 'Conference' ? 'text-pink-900' : 'text-gray-400'}`}
+                  <button
+                    onClick={() =>
+                      navigate(`/${link.toLowerCase().replace(/\s+/g, "-")}`)
+                    }
+                    className={`text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:text-pink-900 hover:translate-x-2 cursor-pointer w-full text-left ${
+                      link === "Conference" ? "text-pink-900" : "text-gray-400"
+                    }`}
                   >
-                    {link.replace(/([A-Z])/g, ' $1').trim()}
+                    {link.replace(/([A-Z])/g, " $1").trim()}
                   </button>
                 </li>
               ))}
@@ -97,14 +121,23 @@ const Conference = () => {
 
         {/* Grid - Image Only + Quick View */}
         <div className="flex-1">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {images.map((image) => (
-              <div key={image.id} onClick={() => openModal(image)} className="group relative aspect-[3/4] overflow-hidden bg-gray-100 cursor-pointer shadow-md hover:shadow-2xl transition-all duration-500 rounded-sm">
-                <img src={image.src} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                
+              <div
+                key={image.id}
+                onClick={() => openModal(image)}
+                // Optional: Change aspect-[3/4] to aspect-square if you want them shorter
+                className="group relative aspect-[3/4] overflow-hidden bg-gray-100 cursor-pointer shadow-md hover:shadow-2xl transition-all duration-500 rounded-sm"
+              >
+                <img
+                  src={image.src}
+                  alt=""
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+
                 {/* Quick View Overlay */}
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                  <button className="bg-white text-pink-950 px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 shadow-xl border border-white cursor-pointer hover:bg-pink-900 hover:text-white hover:border-pink-900">
+                  <button className="bg-white text-pink-950 px-6 py-2 text-[10px] font-bold uppercase tracking-[0.2em] transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 shadow-xl border border-white cursor-pointer hover:bg-pink-900 hover:text-white hover:border-pink-900">
                     Quick View
                   </button>
                 </div>
@@ -116,26 +149,74 @@ const Conference = () => {
 
       {/* Pure Image Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-md cursor-pointer" onClick={closeModal}>
+        <div
+          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-md cursor-pointer"
+          onClick={closeModal}
+        >
           {/* Controls */}
-          <button className="absolute top-6 right-6 text-white/60 hover:text-white p-2 transition-colors cursor-pointer z-50" onClick={closeModal}>
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" /></svg>
-          </button>
-          
-          <button className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white p-4 transition-colors cursor-pointer z-50" onClick={navigateImage(-1)}>
-            <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 19l-7-7 7-7" /></svg>
+          <button
+            className="absolute top-6 right-6 text-white/60 hover:text-white p-2 transition-colors cursor-pointer z-50"
+            onClick={closeModal}
+          >
+            <svg
+              className="w-10 h-10"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
           </button>
 
-          <button className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white p-4 transition-colors cursor-pointer z-50" onClick={navigateImage(1)}>
-            <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 5l7 7-7 7" /></svg>
+          <button
+            className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white p-4 transition-colors cursor-pointer z-50"
+            onClick={navigateImage(-1)}
+          >
+            <svg
+              className="w-12 h-12"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+
+          <button
+            className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white p-4 transition-colors cursor-pointer z-50"
+            onClick={navigateImage(1)}
+          >
+            <svg
+              className="w-12 h-12"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
           </button>
 
           {/* The Image */}
-          <img 
-            src={selectedImage.src} 
-            alt="" 
-            className="max-w-full max-h-[90vh] object-contain shadow-2xl cursor-default" 
-            onClick={(e) => e.stopPropagation()} 
+          <img
+            src={selectedImage.src}
+            alt=""
+            className="max-w-full max-h-[90vh] object-contain shadow-2xl cursor-default"
+            onClick={(e) => e.stopPropagation()}
           />
         </div>
       )}
