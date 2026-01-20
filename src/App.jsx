@@ -16,7 +16,7 @@ import CorporateGift from './pages/Corporatevents/CorporateGift'
 import EventCatering from './pages/Corporatevents/EventCatering'
 
 // --- Wedding Events (Updated Paths) ---
-import Wedding from './pages/Weddingevents/Wedding'
+ 
 import MarriageCard from './pages/Weddingevents/MarriageCard'
 import StageFlowerDecoration from './pages/Weddingevents/StageFlowerDecoration'
 import Entertainment from './pages/Weddingevents/Entertainment'
@@ -58,7 +58,7 @@ function App() {
 
         {/* Corporate Routes */}
         <Route path='/conference' element={<Conference/>}/> {/* Note: You mapped '/conference' to CorporateGift in your code. Should this be <Conference/>? */}
-        <Route path='/wedding-events' element={<Wedding/>}/>
+        <Route path='/wedding-events' element={<MarriageCard/>}/>
         <Route path='/dealersmeet' element={<DealersMeet/>}/>
         <Route path='/culturalevents' element={<CulturalEvents/>}/>
         <Route path='/stageandmusic' element={<StageandMusic/>}/>

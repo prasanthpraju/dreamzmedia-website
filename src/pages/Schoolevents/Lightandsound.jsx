@@ -1,21 +1,61 @@
- import React, { useState } from "react";
+ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Lightandsound = () => {
+// Importing Images
+import ls1 from "../../assets/School/Light&Sound/l1.png";
+import ls2 from "../../assets/School/Light&Sound/l2.png";
+import ls3 from "../../assets/School/Light&Sound/l3.png";
+import ls4 from "../../assets/School/Light&Sound/l4.png";
+import ls5 from "../../assets/School/Light&Sound/l5.png";
+import ls6 from "../../assets/School/Light&Sound/l6.png";
+import ls7 from "../../assets/School/Light&Sound/l7.png";
+import ls8 from "../../assets/School/Light&Sound/l8.png";
+import ls9 from "../../assets/School/Light&Sound/l9.png";
+import ls10 from "../../assets/School/Light&Sound/l10.png";
+import ls11 from "../../assets/School/Light&Sound/l11.png";
+import ls12 from "../../assets/School/Light&Sound/l12.png";
+import ls13 from "../../assets/School/Light&Sound/l13.png";
+import ls14 from "../../assets/School/Light&Sound/l14.png";
+import ls15 from "../../assets/School/Light&Sound/l15.png";
+
+const LightAndSound = () => {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const quickLinks = ["Stage", "Lightandsound", "Shedortent", "Carnival", "Choreography", "Videographyandphotography", "Bannerandarch", "Trophiesandgift"];
-
-  const images = [
-    { id: 1, src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80" },
-    { id: 2, src: "https://images.unsplash.com/photo-1571266028245-69dd19057a02?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" },
-    { id: 3, src: "https://images.unsplash.com/photo-1563841930606-67e2bce48b78?ixlib=rb-4.0.3&auto=format&fit=crop&w=2076&q=80" },
-    { id: 4, src: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" },
-    { id: 5, src: "https://images.unsplash.com/photo-1571974599782-87624638275f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" },
-    { id: 6, src: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" }
+  // Collections Navigation Links
+  // Updated to PascalCase so spaces are inserted correctly in the UI
+  const quickLinks = [
+    "Stage",
+    "LightAndSound",
+    "ShedOrTent",
+    "Carnival",
+    "Choreography",
+    "VideographyAndPhotography",
+    "BannerAndArch",
+    "TrophiesAndGift",
   ];
+
+  // Image Data
+  const images = [
+    { id: 1, src: ls1 },
+    { id: 2, src: ls2 },
+    { id: 3, src: ls3 },
+    { id: 4, src: ls4 },
+    { id: 5, src: ls5 },
+    { id: 6, src: ls6 },
+    { id: 7, src: ls7 },
+    { id: 8, src: ls8 },
+    { id: 9, src: ls9 },
+    { id: 10, src: ls10 },
+    { id: 11, src: ls11 },
+    { id: 12, src: ls12 },
+    { id: 13, src: ls13 },
+    { id: 14, src: ls14 },
+    { id: 15, src: ls15 },
+  ];
+
+  // --- Handlers ---
 
   const openModal = (image) => {
     const index = images.findIndex((img) => img.id === image.id);
@@ -34,22 +74,72 @@ const Lightandsound = () => {
     setSelectedImage(images[newIndex]);
   };
 
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white font-sans">
+      
+      {/* Header Section */}
       <div className="pt-32 pb-12 px-6 text-center border-b border-gray-100">
-        <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 tracking-tight mb-4">Light & Sound</h1>
+        <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 tracking-tight mb-4">
+          Light & Sound
+        </h1>
         <div className="w-24 h-1.5 bg-pink-900 mx-auto mt-4"></div>
       </div>
 
+      {/* Back Button */}
+      <div className="absolute top-24 left-4 md:top-32 md:left-10 z-10">
+        <button
+          onClick={() => navigate("/")}
+          className="group flex items-center gap-2 cursor-pointer text-gray-600 hover:text-pink-900 transition-colors duration-300"
+        >
+          {/* Icon */}
+          <div className="p-2 rounded-full border border-gray-400 group-hover:border-pink-900 group-hover:bg-pink-900 transition-all duration-300">
+            <svg
+              className="w-3 h-3 md:w-4 md:h-4 text-gray-600 group-hover:text-white transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+          </div>
+
+          {/* Text */}
+          <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">
+            Back
+          </span>
+        </button>
+      </div>
+
+      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col lg:flex-row gap-16">
+        
+        {/* Sidebar Navigation */}
         <div className="lg:w-64 flex-shrink-0">
           <div className="sticky top-32">
-            <h3 className="text-2xl font-serif font-bold text-pink-900 mb-8 border-l-4 border-pink-900 pl-4">Collections</h3>
+            <h3 className="text-2xl font-serif font-bold text-pink-900 mb-8 border-l-4 border-pink-900 pl-4">
+              Collections
+            </h3>
             <ul className="space-y-4">
               {quickLinks.map((link, idx) => (
                 <li key={idx}>
-                  <button onClick={() => navigate(`/${link.toLowerCase().replace(/\s+/g, '-')}`)} className={`text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:text-pink-900 hover:translate-x-2 cursor-pointer w-full text-left ${link === 'Lightandsound' ? 'text-pink-900' : 'text-gray-400'}`}>
-                    {link.replace(/([A-Z])/g, ' $1').trim()}
+                  <button
+                    onClick={() => navigate(`/${link.toLowerCase()}`)}
+                    className={`text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:text-pink-900 hover:translate-x-2 cursor-pointer w-full text-left ${
+                      link === "LightAndSound" ? "text-pink-900" : "text-gray-400"
+                    }`}
+                  >
+                    {/* Regex splits PascalCase into words: "LightAndSound" -> "Light And Sound" */}
+                    {link.replace(/([A-Z])/g, " $1").trim()}
                   </button>
                 </li>
               ))}
@@ -57,54 +147,74 @@ const Lightandsound = () => {
           </div>
         </div>
 
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {images.map((image) => (
-            <div key={image.id} onClick={() => openModal(image)} className="group relative aspect-[3/4] overflow-hidden bg-gray-100 cursor-pointer shadow-md hover:shadow-2xl transition-all duration-500 rounded-sm">
-              <img src={image.src} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                <button className="bg-white text-pink-950 px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 shadow-xl border border-white cursor-pointer hover:bg-pink-900 hover:text-white hover:border-pink-900">
-                  Quick View
-                </button>
+        {/* Image Grid - Optimized for 4 Columns */}
+        <div className="flex-1">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {images.map((image) => (
+              <div
+                key={image.id}
+                onClick={() => openModal(image)}
+                className="group relative aspect-[3/4] overflow-hidden bg-gray-100 cursor-pointer shadow-md hover:shadow-2xl transition-all duration-500 rounded-sm"
+              >
+                <img
+                  src={image.src}
+                  alt={`Light & Sound Setup ${image.id}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+
+                {/* Quick View Overlay */}
+                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[2px]">
+                  <button className="bg-white text-pink-950 px-6 py-2 text-[10px] font-bold uppercase tracking-[0.2em] transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 shadow-xl border border-white cursor-pointer hover:bg-pink-900 hover:text-white hover:border-pink-900">
+                    Quick View
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
-       <div className="absolute top-24 left-4 md:top-32 md:left-10 z-10">
-          <button  
-            onClick={() => navigate('/')} 
-            className="group flex items-center gap-2 cursor-pointer text-gray-600 hover:text-pink-900 transition-colors duration-300"
-          >
-            {/* Icon */}
-            <div className="p-2 rounded-full border border-gray-400 group-hover:border-pink-900 group-hover:bg-pink-900 transition-all duration-300">
-              <svg 
-                className="w-3 h-3 md:w-4 md:h-4 text-gray-600 group-hover:text-white transition-colors" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-            </div>
-            
-            {/* Text (Hidden on very small screens, visible on mobile+) */}
-            <span className="text-[10px]   md:text-xs font-bold uppercase tracking-[0.2em] transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">
-              Back
-            </span>
-          </button>
-        </div>
-
+      {/* Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-md cursor-pointer" onClick={closeModal}>
-          <button className="absolute top-6 right-6 text-white/60 hover:text-white p-2 transition-colors cursor-pointer z-50" onClick={closeModal}>✕</button>
-          <button className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white p-4 transition-colors cursor-pointer z-50" onClick={navigateImage(-1)}>←</button>
-          <button className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white p-4 transition-colors cursor-pointer z-50" onClick={navigateImage(1)}>→</button>
-          <img src={selectedImage.src} alt="" className="max-w-full max-h-[90vh] object-contain shadow-2xl cursor-default" onClick={(e) => e.stopPropagation()} />
+        <div
+          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-md cursor-pointer"
+          onClick={closeModal}
+        >
+          {/* Close Button */}
+          <button
+            className="absolute top-6 right-6 text-white/60 hover:text-white p-2 transition-colors cursor-pointer z-50"
+            onClick={closeModal}
+          >
+            ✕
+          </button>
+          
+          {/* Prev Button */}
+          <button
+            className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white p-4 transition-colors cursor-pointer z-50"
+            onClick={navigateImage(-1)}
+          >
+            ←
+          </button>
+          
+          {/* Next Button */}
+          <button
+            className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white p-4 transition-colors cursor-pointer z-50"
+            onClick={navigateImage(1)}
+          >
+            →
+          </button>
+          
+          {/* Full Image */}
+          <img
+            src={selectedImage.src}
+            alt="Expanded View"
+            className="max-w-full max-h-[90vh] object-contain shadow-2xl cursor-default"
+            onClick={(e) => e.stopPropagation()}
+          />
         </div>
       )}
     </div>
   );
 };
 
-export default Lightandsound;
+export default LightAndSound;
