@@ -112,7 +112,8 @@ const DealersMeet = () => {
       </div>
       <div className="absolute top-24 left-4 md:top-32 md:left-10 z-10">
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate(-1)}
+
           className="group flex items-center gap-2 cursor-pointer text-gray-600 hover:text-pink-900 transition-colors duration-300"
         >
           {/* Icon */}

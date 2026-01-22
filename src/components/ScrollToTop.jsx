@@ -1,14 +1,23 @@
- import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
-  // 1. Auto-scroll to top on route change (Fixes your navigation issue)
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      const element = document.getElementById(hash.replace("#", ""));
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
 
   // 2. Show/Hide button based on scroll position
   useEffect(() => {
@@ -20,15 +29,15 @@ const ScrollToTop = () => {
       }
     };
 
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
   // 3. Scroll to top when button is clicked
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
@@ -40,13 +49,18 @@ const ScrollToTop = () => {
           className="group bg-pink-900 text-white p-3 rounded-full shadow-2xl hover:bg-pink-800 transform hover:scale-110 transition-all duration-300 border border-white/20 cursor-pointer"
           aria-label="Scroll to top"
         >
-          <svg 
-            className="w-6 h-6 transform group-hover:-translate-y-1 transition-transform duration-300" 
-            fill="none" 
-            stroke="currentColor" 
+          <svg
+            className="w-6 h-6 transform group-hover:-translate-y-1 transition-transform duration-300"
+            fill="none"
+            stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 10l7-7m0 0l7 7m-7-7v18"
+            />
           </svg>
         </button>
       )}

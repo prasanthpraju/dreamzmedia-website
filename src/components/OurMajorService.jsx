@@ -34,7 +34,7 @@ const OurMajorService = () => {
   const handleCardClick = (serviceId) => {
     switch (serviceId) {
       case 1: navigate("/conference"); break;
-      case 2: navigate("/birthday"); break;
+      case 2: navigate("/Anchor"); break;
       case 3: navigate("/wedding-events"); break;
       case 4: navigate("/schoolevent"); break;
       default: navigate("/services");
@@ -42,7 +42,7 @@ const OurMajorService = () => {
   };
 
   return (
-    <section className="relative py-20 lg:py-28 bg-white font-sans selection:bg-pink-100 selection:text-pink-900">
+    <section id="our-major-service" className="relative py-20 lg:py-28 bg-white font-sans selection:bg-pink-100 selection:text-pink-900">
       
       {/* 1. Header Section */}
       <div className="max-w-7xl mx-auto px-6 mb-16 lg:mb-24 text-center">

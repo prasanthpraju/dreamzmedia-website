@@ -1,8 +1,10 @@
  import React, { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
+import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
 import emailjs from "@emailjs/browser";
 
 const Contact = () => {
+  const navigate = useNavigate(); // 2. Initialize navigate
   const formRef = useRef();
   
   // State for form data
@@ -105,8 +107,27 @@ const Contact = () => {
   ];
 
   return (
-    <section ref={ref} className="min-h-screen bg-stone-50 font-sans selection:bg-pink-100">
+    <section 
+      ref={ref} 
+      className="min-h-screen bg-stone-50 font-sans selection:bg-pink-100 relative" // Added relative for positioning
+    >
       
+      {/* --- NEW: BACK BUTTON --- */}
+      <button 
+        onClick={() => navigate(-1)}
+        className="absolute top-28 left-6 md:top-32 md:left-10 flex items-center gap-2 text-gray-400 hover:text-pink-900 transition-colors duration-300 cursor-pointer group z-50"
+      >
+        <svg 
+          className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span className="text-xs font-bold uppercase tracking-widest">Go Back</span>
+      </button>
+
       {/* 1. Header Section */}
       <div className="pt-32 pb-16 lg:pt-40 lg:pb-24 text-center px-6 bg-gradient-to-b from-white to-stone-50">
         <span className="text-pink-900 text-xs font-bold uppercase tracking-[0.3em] mb-4 block animate-fade-in">
@@ -233,7 +254,7 @@ const Contact = () => {
 
           {/* Right: Info & Map */}
           <div className={`space-y-12 transform transition-all duration-1000 delay-300 ${inView ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-             
+              
              {/* Contact Details */}
              <div className="space-y-8">
                <h3 className="text-2xl font-serif font-bold text-gray-900">Contact Information</h3>

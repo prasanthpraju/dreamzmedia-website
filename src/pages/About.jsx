@@ -4,19 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 const About = () => {
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false);
-  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
-
-  useEffect(() => {
-    if (inView) setIsVisible(true);
-  }, [inView]);
-
-  // 1. Counters Logic
+  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
+  
+  // --- Animation State for Counters ---
   const [counters, setCounters] = useState({ events: 0, clients: 0, years: 0 });
+
   useEffect(() => {
-    if (isVisible) {
+    if (inView) {
       const duration = 2000;
-      const steps = 50;
+      const steps = 60;
       const stepTime = duration / steps;
       let current = 0;
       const timer = setInterval(() => {
@@ -31,190 +27,164 @@ const About = () => {
       }, stepTime);
       return () => clearInterval(timer);
     }
-  }, [isVisible]);
-
-  // 2. Data Organization (Based on your events list)
-  const expertiseAreas = [
-    {
-      category: "Corporate & Business",
-      description: "Strategic execution for high-stakes professional gatherings.",
-      services: ["Conference", "Dealers Meet", "CSR Activities", "Corporate Gifting"],
-      link: "/events"
-    },
-    {
-      category: "Weddings & Social",
-      description: "Curating timeless moments with elegance and cultural integrity.",
-      services: ["Wedding Planning", "Stage & Flower Decor", "Mehndi Designer", "Marriage Cards", "Return Gifts"],
-      link: "/wedding-events"
-    },
-    {
-      category: "Institutional & School",
-      description: "Engaging and safe environments for educational celebrations.",
-      services: ["School Events", "Carnival", "Trophies & Gifts", "Cultural Events"],
-      link: "/schoolevent"
-    },
-    {
-      category: "Production & Technical",
-      description: "The backbone of every great event, handled by experts.",
-      services: ["Stage & Music", "Light & Sound", "Videography", "Event Catering"],
-      link: "/stageandmusic"
-    }
-  ];
+  }, [inView]);
 
   return (
-    <div ref={ref} className="min-h-screen bg-stone-50 font-sans selection:bg-pink-900 selection:text-white">
+    <div className="min-h-screen bg-white font-sans selection:bg-pink-100 relative">
       
-      {/* --- SECTION 1: TYPOGRAPHIC HERO --- */}
-      <div className="relative pt-40 pb-20 px-6 lg:px-12 max-w-[1400px] mx-auto border-l border-r border-gray-200 bg-white">
-        <div className="grid lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-8">
-            <span className="text-pink-900 font-bold tracking-[0.3em] uppercase text-xs mb-6 block animate-fade-in">
-              Since 2010
-            </span>
-            <h1 className="text-6xl md:text-8xl font-serif text-gray-900 leading-[0.9] tracking-tight mb-8">
-              We Engineer <br />
-              <span className="italic text-pink-900">Emotions.</span>
-            </h1>
-            <div className="w-24 h-1.5 bg-gray-900 mb-8"></div>
-            <p className="text-xl md:text-2xl text-gray-500 font-light leading-relaxed max-w-2xl">
-              Dreamzmedia is Chennai’s premier event architect. We move beyond simple planning to create immersive, narrative-driven experiences that linger in memory long after the lights go down.
-            </p>
+      {/* --- FIXED BACK BUTTON --- 
+          1. Changed 'top-8' to 'top-28' to clear any Navigation Bars.
+          2. Added 'z-50' to force it on top of other layers.
+      */}
+      <button 
+        onClick={() => navigate(-1)}
+        className="absolute top-28 left-6 md:top-32 md:left-10 flex items-center gap-2 text-gray-400 hover:text-pink-900 transition-colors duration-300 cursor-pointer group z-50"
+      >
+        <svg 
+          className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span className="text-xs font-bold uppercase tracking-widest">Go Back</span>
+      </button>
+
+      {/* 1. HERO SECTION */}
+      <div className="pt-40 pb-20 px-6 text-center max-w-4xl mx-auto">
+        <span className="text-pink-900 font-bold tracking-[0.2em] text-sm uppercase mb-4 block">
+          Since 2010
+        </span>
+        <h1 className="text-5xl md:text-7xl font-serif text-gray-900 mb-8 leading-tight">
+          We turn bold ideas into <br/>
+          <span className="italic text-pink-900">unforgettable realities.</span>
+        </h1>
+        <p className="text-lg text-gray-500 font-light leading-relaxed max-w-2xl mx-auto">
+          Dreamzmedia is Chennai’s premier event management company. We combine creative vision with logistical precision to craft events that leave a lasting impact.
+        </p>
+      </div>
+
+      {/* 2. STATS BAR */}
+      <div ref={ref} className="bg-gray-50 border-y border-gray-100 py-12">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-3 gap-8 text-center divide-x divide-gray-200">
+          <div>
+            <div className="text-4xl md:text-5xl font-serif text-gray-900 mb-2">{counters.years}+</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-gray-400">Years Experience</div>
           </div>
-          <div className="lg:col-span-4 flex flex-col justify-end items-start lg:items-end">
-             {/* Abstract Decorative Element */}
-             <div className="w-40 h-40 border-[1px] border-pink-900 rounded-full flex items-center justify-center relative">
-                <div className="w-32 h-32 bg-pink-900 rounded-full flex items-center justify-center text-white text-center text-xs font-bold uppercase tracking-widest p-4">
-                  Crafting<br/>Magic
-                </div>
-                <div className="absolute inset-0 border-t border-r border-gray-300 rounded-full animate-spin-slow"></div>
-             </div>
+          <div>
+            <div className="text-4xl md:text-5xl font-serif text-gray-900 mb-2">{counters.events}+</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-gray-400">Events Managed</div>
+          </div>
+          <div>
+            <div className="text-4xl md:text-5xl font-serif text-gray-900 mb-2">{counters.clients}+</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-gray-400">Happy Clients</div>
           </div>
         </div>
       </div>
 
-      {/* --- SECTION 2: THE SPLIT STORY (Asymmetrical) --- */}
-      <div className="relative bg-stone-900 text-white">
-        <div className="grid lg:grid-cols-2 h-auto lg:h-[800px]">
+      {/* 3. WHO WE ARE */}
+      <div className="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center">
+        {/* Image Side */}
+        <div className="relative group">
+          <div className="absolute inset-0 bg-pink-900 transform translate-x-4 translate-y-4 rounded-sm transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
+          <img 
+            src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+            alt="Our Team" 
+            className="relative w-full h-[500px] object-cover rounded-sm shadow-lg grayscale group-hover:grayscale-0 transition-all duration-700"
+          />
+        </div>
+
+        {/* Text Side */}
+        <div>
+          <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-6">More than just planners.</h2>
+          <p className="text-gray-600 leading-loose mb-6">
+            We are a team of designers, strategists, and technical experts. While others focus on checklists, we focus on the narrative. Every light fixture, every sound cue, and every floral arrangement is placed with purpose.
+          </p>
+          <p className="text-gray-600 leading-loose mb-8">
+            Whether it is a global corporate summit or an intimate family wedding, our promise remains the same: <strong>Flawless execution.</strong>
+          </p>
           
-          {/* Left: Image (Full Height) */}
-          <div className="relative h-[500px] lg:h-full overflow-hidden">
-            <img 
-              src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80" 
-              alt="Team Strategy" 
-              className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent"></div>
-            <div className="absolute bottom-12 left-12">
-               <p className="font-serif text-3xl italic">"Details make the design."</p>
-            </div>
-          </div>
-
-          {/* Right: Content */}
-          <div className="flex flex-col justify-center px-8 py-20 lg:p-24">
-            <h2 className="text-4xl font-serif mb-8">The Dreamz Difference</h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
-              In a world of noise, we create resonance. Whether it's a high-stakes <strong>Corporate Conference</strong> involving global leaders, or an intimate <strong>Wedding</strong> steeped in tradition, our approach remains the same: <span className="text-white">Precision, Passion, and Perfection.</span>
-            </p>
-            <p className="text-gray-400 text-lg leading-relaxed mb-12">
-              Our 45+ member team comprises designers, technical directors, and logistics experts who work in unison to handle the complex choreography of modern events.
-            </p>
-
-            {/* Stats Row */}
-            <div className="grid grid-cols-3 gap-8 border-t border-gray-800 pt-12">
-              <div>
-                <div className="text-4xl font-serif text-pink-500 mb-1">{counters.years}+</div>
-                <div className="text-xs uppercase tracking-widest text-gray-500">Years</div>
-              </div>
-              <div>
-                <div className="text-4xl font-serif text-pink-500 mb-1">{counters.events}+</div>
-                <div className="text-xs uppercase tracking-widest text-gray-500">Events</div>
-              </div>
-              <div>
-                <div className="text-4xl font-serif text-pink-500 mb-1">{counters.clients}+</div>
-                <div className="text-xs uppercase tracking-widest text-gray-500">Clients</div>
-              </div>
-            </div>
+          <div className="flex gap-4">
+            <div className="h-1 w-16 bg-pink-900"></div>
+            <p className="text-sm font-bold uppercase tracking-widest text-pink-900">The Dreamz Standard</p>
           </div>
         </div>
       </div>
 
-      {/* --- SECTION 3: OUR SPECTRUM (The "Menu" Layout) --- */}
-      <div className="py-24 px-6 lg:px-12 max-w-[1400px] mx-auto bg-white border-l border-r border-gray-200">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-serif text-gray-900 mb-4">Our Spectrum</h2>
-          <p className="text-gray-500 font-light">Comprehensive expertise across four pillars</p>
-        </div>
+      {/* 4. OUR EXPERTISE */}
+      <div className="bg-stone-900 text-white py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-serif mb-4">Our Expertise</h2>
+            <p className="text-gray-400">Four pillars of our service excellence</p>
+          </div>
 
-        <div className="grid md:grid-cols-2 gap-x-16 gap-y-16">
-          {expertiseAreas.map((area, index) => (
-            <div key={index} className="group">
-              {/* Category Header */}
-              <div className="flex items-baseline justify-between border-b border-gray-900 pb-4 mb-6">
-                <h3 className="text-2xl font-serif font-bold text-gray-900 group-hover:text-pink-900 transition-colors">
-                  {area.category}
-                </h3>
-                <span className="text-pink-900 font-serif italic text-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                  0{index + 1}
-                </span>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Card 1 */}
+            <div 
+              onClick={() => navigate('/events')}
+              className="bg-white/5 p-8 border border-white/10 hover:bg-white/10 transition-colors duration-300 cursor-pointer group"
+            >
+              <div className="h-10 w-10 bg-pink-600 mb-6 flex items-center justify-center rounded-full">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
               </div>
-
-              {/* Description */}
-              <p className="text-gray-600 mb-6 font-light">{area.description}</p>
-
-              {/* Tag Cloud of Specific Services */}
-              <div className="flex flex-wrap gap-2 mb-8">
-                {area.services.map((service, i) => (
-                  <span key={i} className="px-3 py-1 bg-stone-100 text-xs font-bold uppercase tracking-wider text-gray-700 border border-stone-200 group-hover:border-pink-200 group-hover:bg-pink-50 transition-colors">
-                    {service}
-                  </span>
-                ))}
-              </div>
-              
-              {/* Link */}
-              <button 
-                onClick={() => navigate(area.link)}
-                className="text-sm font-bold uppercase tracking-widest text-gray-900 border-b-2 border-transparent hover:border-pink-900 transition-all"
-              >
-                View Portfolio &rarr;
-              </button>
+              <h3 className="text-xl font-serif mb-3">Corporate</h3>
+              <p className="text-sm text-gray-400 mb-6 leading-relaxed">Conferences, Dealers Meets, and CSR activities executed with professionalism.</p>
+              <span className="text-xs font-bold uppercase tracking-widest text-pink-400 group-hover:text-white transition-colors">Explore &rarr;</span>
             </div>
-          ))}
+
+            {/* Card 2 */}
+            <div 
+              onClick={() => navigate('/wedding-events')}
+              className="bg-white/5 p-8 border border-white/10 hover:bg-white/10 transition-colors duration-300 cursor-pointer group"
+            >
+              <div className="h-10 w-10 bg-pink-600 mb-6 flex items-center justify-center rounded-full">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+              </div>
+              <h3 className="text-xl font-serif mb-3">Weddings</h3>
+              <p className="text-sm text-gray-400 mb-6 leading-relaxed">From Mehndi to Reception, we curate timeless moments of love.</p>
+              <span className="text-xs font-bold uppercase tracking-widest text-pink-400 group-hover:text-white transition-colors">Explore &rarr;</span>
+            </div>
+
+            {/* Card 3 */}
+            <div 
+              onClick={() => navigate('/schoolevent')}
+              className="bg-white/5 p-8 border border-white/10 hover:bg-white/10 transition-colors duration-300 cursor-pointer group"
+            >
+              <div className="h-10 w-10 bg-pink-600 mb-6 flex items-center justify-center rounded-full">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+              </div>
+              <h3 className="text-xl font-serif mb-3">School Events</h3>
+              <p className="text-sm text-gray-400 mb-6 leading-relaxed">Carnivals, Annual Days, and Cultural Fests managed with energy.</p>
+              <span className="text-xs font-bold uppercase tracking-widest text-pink-400 group-hover:text-white transition-colors">Explore &rarr;</span>
+            </div>
+
+            {/* Card 4 */}
+            <div 
+              onClick={() => navigate('/stageandmusic')}
+              className="bg-white/5 p-8 border border-white/10 hover:bg-white/10 transition-colors duration-300 cursor-pointer group"
+            >
+              <div className="h-10 w-10 bg-pink-600 mb-6 flex items-center justify-center rounded-full">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+              </div>
+              <h3 className="text-xl font-serif mb-3">Production</h3>
+              <p className="text-sm text-gray-400 mb-6 leading-relaxed">State-of-the-art Sound, Light, and Stage fabrication services.</p>
+              <span className="text-xs font-bold uppercase tracking-widest text-pink-400 group-hover:text-white transition-colors">Explore &rarr;</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* --- SECTION 4: THE VALUES (Cards) --- */}
-      <div className="bg-stone-50 py-24 px-6">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
-          {[
-            { title: "Precision", desc: "We adhere to timelines with military discipline." },
-            { title: "Innovation", desc: "We don't follow trends; we set them." },
-            { title: "Integrity", desc: "Transparent pricing and honest communication." }
-          ].map((val, idx) => (
-            <div key={idx} className="bg-white p-10 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
-               <div className="w-12 h-1 bg-pink-900 mb-6"></div>
-               <h3 className="text-2xl font-serif font-bold text-gray-900 mb-4">{val.title}</h3>
-               <p className="text-gray-500 leading-relaxed">{val.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* --- SECTION 5: CALL TO ACTION --- */}
-      <div className="relative py-32 text-center bg-gray-900 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
-        
-        <div className="relative z-10 px-6">
-          <h2 className="text-4xl md:text-6xl font-serif text-white mb-8">
-            Ready to make <span className="italic text-pink-500">history?</span>
-          </h2>
-          <button 
-            onClick={() => navigate('/contact')}
-            className="px-10 py-4 bg-white text-gray-900 font-bold uppercase tracking-widest text-sm hover:bg-pink-900 hover:text-white transition-all duration-300"
-          >
-            Start the Conversation
-          </button>
-        </div>
+      {/* 5. CTA SECTION */}
+      <div className="py-20 text-center px-6">
+        <h2 className="text-3xl md:text-4xl font-serif text-gray-900 mb-6">Let's create something extraordinary.</h2>
+        <button 
+          onClick={() => navigate('/contact')}
+          className="bg-pink-900 text-white px-8 py-3 rounded-sm text-sm font-bold uppercase tracking-widest hover:bg-gray-900 transition-colors shadow-lg cursor-pointer"
+        >
+          Contact Us
+        </button>
       </div>
 
     </div>
